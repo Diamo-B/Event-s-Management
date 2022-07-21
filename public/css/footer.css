@@ -1,0 +1,33 @@
+.footer {
+    position: absolute;
+    width: 1366px;
+    height: 67px;
+    left: 0px;
+    top: 585px;
+
+    background: #3B5B75;
+    border-top: 1px solid #FFFFFF;
+}
+
+.footer p {
+    position: relative;
+    width: 700px;
+    height: 20px;
+    left: 350px;
+    top: 25px;
+    font-family: 'Ubuntu';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+
+    color: #FFFFFF;
+
+}
+
+.footer p a {
+    position: relative;
+    color: #20DF7F;
+    left: 10px;
+    text-decoration: none;
+}

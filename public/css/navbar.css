@@ -1,0 +1,62 @@
+.navbar {
+    position: absolute;
+    width: 1366px;
+    height: 70px;
+    left: 0px;
+    top: 0px;
+
+    background: #3B5B75;
+    border-bottom: 2px solid #DCDCDC;
+}
+
+.logo {
+    position: absolute;
+    width: 130.91px;
+    height: 50px;
+    left: 57px;
+    top: 9px;
+}
+
+.setingsGear {
+    position: absolute;
+    width: 24px;
+    height: 22.1px;
+    left: 1150px;
+    top: 23px;
+}
+
+.Logout {
+
+    position: absolute;
+    width: 130px;
+    height: 50px;
+    left: 1200px;
+    top: 9px;
+
+    background: #20DF7F;
+    border: 2px solid white;
+    border-radius: 56px;
+}
+
+.Logout span {
+    position: relative;
+    width: 97.31px;
+    height: 18px;
+    left: 1px;
+    font-family: 'Ubuntu';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 18px;
+    color: #FFFFFF;
+}
+
+.Logout:hover
+{
+    background: #FFFFFF;
+}
+
+.Logout:hover span
+{
+    color: #000031;
+}
