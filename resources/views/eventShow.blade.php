@@ -265,12 +265,20 @@
                             <h3>Location: {{ $details->location }}</h3>    
                         </div>
                         <div style="border:5px solid #3c5f7c; border-radius:10px; background-color:#374755; padding:5px 0px">
-                            <h3>Room: {{ $details->room }}</h3> 
+                            <h3>Room: {{  $details->room}}</h3> 
                         </div>
                     </div>    
                 </div>
                 <br><br> 
             </div>
+            <br><br><br><br><br><br><br>
+            
+            <form action="{{ route('event.destroy',  $details->id) }}" method="post">
+                @csrf
+                @method('DELETE')
+                <button type="submit" style="color:white; background_color:red;">Delete Event</button>
+            </form>
+
         @endisset
     
     </main>
