@@ -7,4 +7,4 @@
         <a href="{{ route('logout') }}"><button class="Logout"><span>Logout</span></button></a>
       </div>
     </nav>
-  </header>
+</header>
