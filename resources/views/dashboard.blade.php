@@ -34,9 +34,9 @@
               <div class="containerTitle" style="top: 20px; left: 83px">Invitations</div>
       
               <div class="buttonContainer">
-                  <button class="buttons" style="margin-bottom: 18px;">
+                  <a href="{{ route('invitation.create') }}"><button class="buttons" style="margin-bottom: 18px;">
                       Create an Invitation Model 
-                  </button>
+                  </button></a>
         
                   <button class="buttons" style="margin-top: 5px;">
                     View Invitations Status
