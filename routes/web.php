@@ -27,6 +27,9 @@ Route::get('event/search',[eventController::class,'search'])->middleware(['auth'
 Route::get('invitation',[invitationController::class,'create'])->middleware(['auth'])->name('invitation.create');
 Route::post('invitation',[invitationController::class,'store'])->middleware(['auth'])->name('invitation.store');
 
+//* Excel file  import
+Route::post('invitation/participants/import',[invitationController::class,'import'])->middleware(['auth'])->name('invitation.participants.import');
+
 //*mailer
 Route::get('Invite',[mailController::class,'send'])->middleware(['auth'])->name('Invite.index');
 require __DIR__.'/auth.php';

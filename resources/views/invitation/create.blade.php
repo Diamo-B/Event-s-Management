@@ -21,7 +21,7 @@
 @section('content')
     @include('navbar')
     <main>
-        <form action="{{ route('invitation.store') }}" method="post" class="formCard" style="height: 600px;">
+        <form action="{{ route('invitation.participants.import') }}" method="post" enctype="multipart/form-data" class="formCard" style="height: 600px;">
             @csrf
             <p class="header" style="width: 303px; left:216px;"> Create an Invitation</p><br><br>
 
@@ -37,7 +37,7 @@
 
             <div class="formBlock" style="top:50px;">
                 <label for="participants" style="left: 39%">Participants</label><br>
-                <input type="file" name="excel" class="fileInput" id="participants">
+                <input type="file" name="excel" id="participants">
             </div>
 
             <button type="submit" class="submit">Create</button>
