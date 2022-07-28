@@ -42,10 +42,9 @@ return [
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
-            'local_domain' => env('MAIL_EHLO_DOMAIN'),
         ],
 
-        'ses' => [
+        /* 'ses' => [
             'transport' => 'ses',
         ],
 
@@ -77,7 +76,7 @@ return [
                 'smtp',
                 'log',
             ],
-        ],
+        ], */
     ],
 
     /*
@@ -115,4 +114,12 @@ return [
         ],
     ],
 
+
+    'stream' => [
+        'ssl' => [
+            'allow_self_signed' => true,
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+        ],
+    ],
 ];

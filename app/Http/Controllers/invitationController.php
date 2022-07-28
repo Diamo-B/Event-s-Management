@@ -40,9 +40,15 @@ class invitationController extends Controller
 
         //- Getting the attachment file and stores it's text in a content variable
         $file = $request->file('attachment');
+        $filePath = null;
         $fileName = $file->getClientOriginalName();
+        if($request->hasFile('attachment'))
+        {
+            $filePath = $file->storeAs('attachments',$fileName,'public');
+        }
+        
         $fileExt =$file->getClientOriginalExtension();
-        $filePath = $file->storeAs('public/attachments', $fileName);
+        
 
         $invitation = new Invitation(
             [

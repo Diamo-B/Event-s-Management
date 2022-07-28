@@ -5,6 +5,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 
 class InvitationMail extends Mailable
 {
@@ -15,14 +16,12 @@ class InvitationMail extends Mailable
     public $eventData;
     public $campaignData;
     public $dataRecipient;
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
+   
+    
     public function __construct($data,$recipient,$status,$invitation,$event,$Campaign)
     {
-        $this->dataRecipient = $data;             //^ done
+        
+        $this->dataRecipient = $data;                 //^ done
         $this->emailOfthisRecipient = $recipient;    //^ done
         $this->CampaignStatus = $status;            //^ done
         $this->invitationData = $invitation;       //^ done
@@ -37,6 +36,18 @@ class InvitationMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Event Invitation')->view('emails.InvitationMail');
+        return $this->subject('Event Invitation')->view('emails.InvitationMail')
+        ->attach(storage_path('app\public\attachments'.'\\'.$this->invitationData['attachmentName']),['as' => $this->invitationData['attachmentName']]);
+    }
+
+    public function deleteFileFromStorage($filePath)
+    {
+        if(Storage::exists($filePath))
+        {
+            Storage::delete($filePath);
+        }else
+        {
+            dd('File does not exists.');
+        }
     }
 }

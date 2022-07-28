@@ -40,7 +40,7 @@ class campaigncontroller extends Controller
         $eventId = $request->input('event');
         $event = Event::find($eventId);
         $status = $request->input('status');
-        $invitation = Invitation::all()->where('eventId',$eventId)[0];
+        $invitation = Invitation::where('eventId',$eventId)->get()[0];
         $relaunchNumber = 0;
         $countComplement = (Campaign::all()->where('status', 'Complement')->count());
         $count = Campaign::all()->where('invitationId', $invitation->id )->count();

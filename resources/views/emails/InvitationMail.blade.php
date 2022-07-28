@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -8,11 +7,8 @@
 </head>
 
 <body>
-    <header>
         <h1>Invitation to the event: '{{ $eventData->title }}'</h1>
         <h2>Invitation Status: {{ $CampaignStatus }}</h2>
-    </header>
-    <main>
         <p>
             dear {{ $dataRecipient["title"] }} {{ $dataRecipient["firstName"] }},
         </p>
@@ -24,10 +20,6 @@
             See you there, <br>
             <strong>WebMaster</strong>
         </p>
-    </main>
-    <footer>
-        <h4>Attachment:</h4>
-    </footer>
 </body>
 
 </html>
