@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Campaign;
+use Illuminate\Support\Facades\Storage;
 
 class mailController extends Controller
 {
@@ -53,11 +53,12 @@ class mailController extends Controller
 
             //* make the relationship between the campaign and the recipients
             $user->campaigns()->attach($Campaign);
-
             //* Send the data to the mailer function
-            Mail::to($recipient)->send(new \App\Mail\InvitationMail($data[$userIndex],$recipient,$status,$invitation,$event,$Campaign));
+            Mail::to($recipient)->send(new \App\Mail\InvitationMail($data[$userIndex],$recipient,$status,$invitation,$event,$Campaign))
+            ;//->attach(public_path($invitation["attachmentPath"]),['as' => $invitation['attachmentName']]);
             sleep(2);
-        } 
+        }
+        $this->deleteFileFromStorage($invitation["attachmentPath"]);
     }
 
     public function makeUser($userIndex,$data,$role)
@@ -72,5 +73,16 @@ class mailController extends Controller
         );   
         $newUser->role()->associate($role)->save();
         return;
+    }
+
+    public function deleteFileFromStorage($filePath)
+    {
+        if(Storage::exists($filePath))
+        {
+            Storage::delete($filePath);
+        }else
+        {
+            dd('File does not exists.');
+        }
     }
 }

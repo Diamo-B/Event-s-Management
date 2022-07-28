@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Invitation;
 use Illuminate\Http\Request;
-use Asika\pdf2text;
+
 
 class invitationController extends Controller
 {
@@ -31,82 +31,31 @@ class invitationController extends Controller
         $request->validate([
             'Event' => 'required',
             'Body' => 'required',
-            'attachment' => 'required|file|mimes:txt,docx,pdf',
+            'attachment' => 'file|mimes:txt,docx,doc,csv,xlx,xls,xlsx,pdf|max:2048',
         ]);
+
         $eventID = $request->input('Event');
         $event = Event::find($eventID);
         $body = $request->input('Body'); 
 
         //- Getting the attachment file and stores it's text in a content variable
         $file = $request->file('attachment');
-        $fileExtention = $file->getClientOriginalExtension();
-        switch ($fileExtention) {
-            case 'txt':
-                $content = str_replace(['\n','\r'],' ',file_get_contents($file->getRealPath()));                
-                break;
-            case 'docx':
-                $content = $this->docx_to_text($file->getRealPath());
-                break;
-            case 'pdf':
-                $reader = new Pdf2text();
-                $content = $reader->decode($file->getRealPath());
-                break;
-            default:
-                dd('file extension Non Supported');
-                break;
-        }
+        $fileName = $file->getClientOriginalName();
+        $fileExt =$file->getClientOriginalExtension();
+        $filePath = $file->storeAs('public/attachments', $fileName);
+
         $invitation = new Invitation(
             [
                 'eventId' => $eventID,
                 'object' => $body,
-                'attachment' => $content
+                'attachmentName' => $fileName,
+                'attachmentPath' => $filePath,
+                'attachmentExt'=>$fileExt,
             ]
         );
         $invitation->save();
         $invitation->event()->associate($event)->save();
         return redirect(route('campaign.create',compact('event')));
-    }
-    
-    
-/**
- * Class RD_Text_Extraction
- *
- * Example usage:
- *
- * $response = RD_Text_Extraction::convert_to_text($path_to_valid_file);
- *
- * For PDF text extraction, this class requires the Smalot\PdfParser\Parser class.
- * @see https://stackoverflow.com/questions/19503653/how-to-extract-text-from-word-file-doc-docx-xlsx-pptx-php
- *
- */
-
-    protected static function docx_to_text( $path_to_file )
-    {
-        $response = '';
-        $zip      = zip_open($path_to_file);
-
-        if (!$zip || is_numeric($zip)) return false;
-
-        while ($zip_entry = zip_read($zip)) {
-
-            if (zip_entry_open($zip, $zip_entry) == FALSE)
-                continue;
-
-            if (zip_entry_name($zip_entry) != 'word/document.xml')
-                continue;
-
-            $response .= zip_entry_read($zip_entry, zip_entry_filesize($zip_entry));
-
-            zip_entry_close($zip_entry);
-        }
-
-        zip_close($zip);
-
-        $response = str_replace('</w:r></w:p></w:tc><w:tc>', ' ', $response);
-        $response = str_replace('</w:r></w:p>', "\r\n", $response);
-        $response = strip_tags($response);
-
-        return $response;
     }
 
 

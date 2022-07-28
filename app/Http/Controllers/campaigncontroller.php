@@ -71,7 +71,6 @@ class campaigncontroller extends Controller
             [
                 'status' => $status,
                 'relaunchNumber' => $relaunchNumber,
-
             ]
         );
         $Campaign->Invitation()->associate($invitation);
@@ -81,7 +80,7 @@ class campaigncontroller extends Controller
         $data = $this->importData($file);
         $mailController = new mailController;
         $mailController->send($request,$data,$status,$invitation,$event,$Campaign);
-        //return redirect(route('Invite'))->with('data','status','invitation',' event');
+        
     }
 
     function importData($file)

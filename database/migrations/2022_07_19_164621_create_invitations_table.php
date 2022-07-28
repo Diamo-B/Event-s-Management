@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('eventId')->nullable()->constrained('events')->onDelete('cascade');
             $table->longText("object");
-            $table->longText('attachment');
+            $table->string('attachmentName')->nullable();
+            $table->string('attachmentExt')->nullable();
+            $table->string('attachmentPath')->nullable();
         });
     }
 

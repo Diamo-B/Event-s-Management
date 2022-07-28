@@ -20,15 +20,13 @@
             {{ $invitationData->object }}
         </p>
         <br>
-        <h4>Attachment:</h4>
-        {{ $invitationData->attachment }}
-    </main>
-    <footer>
         <p>
             See you there, <br>
             <strong>WebMaster</strong>
         </p>
-
+    </main>
+    <footer>
+        <h4>Attachment:</h4>
     </footer>
 </body>
 
