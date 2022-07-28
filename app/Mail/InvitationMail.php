@@ -10,15 +10,25 @@ use Illuminate\Queue\SerializesModels;
 class InvitationMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $details;
+    public $emailOfthisRecipient;
+    public $CampaignStatus;
+    public $invitationData;
+    public $eventData;
+    public $campaignData;
+    public $dataRecipient;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($details)
+    public function __construct($data,$recipient,$status,$invitation,$event,$Campaign)
     {
-        $this->details = $details;
+        $this->dataRecipient = $data;             //^ done
+        $this->emailOfthisRecipient = $recipient;    //^ done
+        $this->CampaignStatus = $status;            //^ done
+        $this->invitationData = $invitation;       //^ done
+        $this->eventData = $event;                //^ done
+        $this->campaignData = $Campaign;
     }
 
     /**
@@ -28,6 +38,6 @@ class InvitationMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Event Invitation')->markdown('emails.InvitationMail');
+        return $this->subject('Event Invitation')->view('emails.InvitationMail');
     }
 }

@@ -143,8 +143,7 @@
             color: #0088ff;
         }
 
-        .searchbar
-        {
+        .searchbar {
             color: white;
             font-family: 'ubuntu';
             font-weight: 200;
@@ -156,71 +155,95 @@
             background-color: #3B5B75;
             text-align: center;
             border: 1px solid white;
-            border-radius:5px;
+            border-radius: 5px;
         }
-        .searchbar::placeholder
-        {
+
+        .searchbar::placeholder {
             color: rgba(255, 255, 255, 0.548);
         }
-        .searchButton
-        {
+
+        .searchButton {
             color: white;
             position: relative;
             top: 20px;
             left: 41%;
             border: 1px solid white;
-            width:30px;
+            width: 30px;
             border-radius: 20px;
-            background-color: #15f082; 
-        } 
-        .searchButton:hover 
-        {
-            background: white;           
+            background-color: #15f082;
         }
-        .searchButton:hover span
+
+        .searchButton:hover {
+            background: white;
+        }
+
+        .searchButton:hover span {
+            color: #232427;
+        }
+
+        .delbutton
         {
-            color:#232427;
+            color: white;
+            position: relative;
+            top:-60px;
+            width: 300px;
+            padding: 5px 0;
+            border:3px solid white;
+            left:450px; 
+            font-weight:600;
+            background-color: #15f082;
+            border-radius: 20px;
+        }
+        .delbutton:hover
+        {
+            background-color: white;
+        }
+        .delbutton:hover span
+        {
+            color: #232427;
         }
     </style>
 @endsection
 
 @section('navbar addition')
-<form action="{{ route('event.search') }}" method="post">
-    @csrf
-    <input type="text" name="search"  placeholder="Search an event by title or location" autocomplete="off" class="searchbar">
-    <button type="submit" class="searchButton"><span>></span></button>
-</form>   
+    @isset ($search)
+        <form action="{{ route('event.search') }}" method="post">
+            @csrf
+            <input type="text" name="search" placeholder="Search an event by title or location" autocomplete="off"
+                class="searchbar">
+            <button type="submit" class="searchButton"><span>></span></button>
+        </form>
+    @endisset
 @endsection
 
 @section('content')
     @include('navbar')
     <main>
 
-<!-- -----------------------------------------     index      --------------------------------------------- -->
+        <!-- -----------------------------------------     index      --------------------------------------------- -->
         @isset($events)
-        <div class="container">
-            
+            <div class="container">
+
                 @foreach ($events as $event)
-                <div class="card">
-                    <div class="box">
-                        <div class="content">
-                            <h3>{{ $event->title }}</h3>
-                            <p>{{ Str::limit($event->object, 100, $end='.......') }}</p>
-                            <a href="{{ route('event.show',$event->id) }}">Read More</a>
+                    <div class="card">
+                        <div class="box">
+                            <div class="content">
+                                <h3>{{ Str::limit($event->title, 20, $end = '.......') }}</h3>
+                                <p>{{ Str::limit($event->object, 100, $end = '.......') }}</p>
+                                <a href="{{ route('event.show', $event->id) }}">Read More</a>
+                            </div>
                         </div>
                     </div>
-                </div>
                 @endforeach
-            
-        </div>
-        @if ($events->hasPages())
-        <div class="nextPrevious">
-            {{ $events->links() }}
-        </div>
-        @endif
-        
-        @endisset 
-<!-- -----------------------------------------     Search    --------------------------------------------- -->
+
+            </div>
+            @if ($events->hasPages())
+                <div class="nextPrevious">
+                    {{ $events->links() }}
+                </div>
+            @endif
+        @endisset
+        <!-- -----------------------------------------     Search    --------------------------------------------- -->
         @isset($foundEvent)
             <div class="container">
                 @foreach ($foundEvent as $event)
@@ -228,59 +251,56 @@
                         <div class="box">
                             <div class="content">
                                 <h3>{{ $event->title }}</h3>
-                                <p>{{ Str::limit($event->object, 100, $end='....') }}</p>
-                                <a href="{{ route('event.show',$event->id) }}">Read More</a>
+                                <p>{{ Str::limit($event->object, 100, $end = '....') }}</p>
+                                <a href="{{ route('event.show', $event->id) }}">Read More</a>
                             </div>
                         </div>
                     </div>
                 @endforeach
-            </div>  
-        
+            </div>
+
             @if ($foundEvent->hasPages())
                 <div class="nextPrevious">
                     {{ $foundEvent->links() }}
                 </div>
             @endif
-        
         @endisset
 
-<!-- -----------------------------------------     details    --------------------------------------------- -->
+        <!-- -----------------------------------------     details    --------------------------------------------- -->
         @isset($details)
             <div class="container">
                 <div class="card" style="background:#3B5B75; color:white;">
-                    <div class="content" style="text-align:center;" >
+                    <div class="content" style="text-align:center;">
                         <div style="border:5px solid #3c5f7c; border-radius:10px; background-color:#374755; padding:5px 0px">
                             <h3>{{ $details->title }}</h3>
                         </div>
-                        
+
                         <div style="border:5px solid #3c5f7c; background-color:#374755; padding:5px 0px">
                             <p>{{ $details->object }}</p>
                         </div>
 
                         <div style="border:5px solid #3c5f7c; border-radius:10px; background-color:#374755; padding:5px 0px">
-                            <h3>Starting At: <br> {{ $details->startingAt }} <br> Ending At: <br> {{ $details->endingAt }}</h3>
+                            <h3>Starting At: <br> {{ $details->startingAt }} <br> Ending At: <br> {{ $details->endingAt }}
+                            </h3>
                         </div>
 
                         <div style="border:5px solid #3c5f7c; border-radius:10px; background-color:#374755; padding:5px 0px">
-                            <h3>Location: {{ $details->location }}</h3>    
+                            <h3>Location: {{ $details->location }}</h3>
                         </div>
                         <div style="border:5px solid #3c5f7c; border-radius:10px; background-color:#374755; padding:5px 0px">
-                            <h3>Room: {{  $details->room}}</h3> 
+                            <h3>Room: {{ $details->room }}</h3>
                         </div>
-                    </div>    
+                    </div>
                 </div>
-                <br><br> 
             </div>
-            <br><br><br><br><br><br><br>
-            
-            <form action="{{ route('event.destroy',  $details->id) }}" method="post">
+
+            <form action="{{ route('event.destroy', $details->id) }}" method="post">
                 @csrf
                 @method('DELETE')
-                <button type="submit" style="color:white; background_color:red;">Delete Event</button>
+                <button type="submit" class="delbutton" ><span>Delete</span></button>
             </form>
-
         @endisset
-    
+
     </main>
     @include('footer')
 @endsection

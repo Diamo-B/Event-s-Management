@@ -8,6 +8,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\Session;
+use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Redirect;
 
 class AuthenticatedSessionController extends Controller
@@ -31,9 +33,11 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request)
     {
         $request->authenticate();
-
+        if(auth()->user()->roleId == 3)
+        {
+            $this->destroy($request);
+        }
         $request->session()->regenerate();
-
         return redirect(route('dashboard'));
     }
 

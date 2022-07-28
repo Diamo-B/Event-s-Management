@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\campaignController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\eventController;
 use App\Http\Controllers\mailController;
@@ -21,15 +22,16 @@ Route::get('/dashboard',[dashboardController::class,'index'])->middleware(['auth
 
 //*events
 Route::resource('event',eventController::class)->middleware(['auth']);
-Route::get('event/search',[eventController::class,'search'])->middleware(['auth'])->name('event.search');
+Route::any('event/search',[eventController::class,'search'])->middleware(['auth'])->name('event.search');
 
 //*invitation
 Route::get('invitation',[invitationController::class,'create'])->middleware(['auth'])->name('invitation.create');
 Route::post('invitation',[invitationController::class,'store'])->middleware(['auth'])->name('invitation.store');
 
-//* Excel file  import
-Route::post('invitation/participants/import',[invitationController::class,'import'])->middleware(['auth'])->name('invitation.participants.import');
+//* campaign
+Route::get('campaign/create',[campaignController::class,'create'])->middleware(['auth'])->name('campaign.create');
+Route::post('campaign/store',[campaignController::class,'store'])->middleware(['auth'])->name('campaign.store');
 
 //*mailer
-Route::get('Invite',[mailController::class,'send'])->middleware(['auth'])->name('Invite.index');
+Route::get('Invite',[mailController::class,'send'])->middleware(['auth'])->name('Invite.send');
 require __DIR__.'/auth.php';

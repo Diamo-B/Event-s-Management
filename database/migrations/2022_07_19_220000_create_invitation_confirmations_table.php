@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('invitation_confirmations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
-            $table->foreignId('event_id')->nullable()->constrained('events')->onDelete('cascade');
+            $table->foreignId('userId')->nullable()->constrained('users')->onDelete('cascade');
+            $table->foreignId('eventId')->nullable()->constrained('events')->onDelete('cascade');
             $table->boolean('isConfirmed');
             $table->boolean('isPresent');
         });

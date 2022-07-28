@@ -16,6 +16,17 @@ class Campaign extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class,'campaign_user','campaignId','userId');
     }
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class,'eventId');
+    }
+
+    public function Invitation()
+    {
+        return $this->belongsTo(Invitation::class,'invitationId');
+    }
+
 }

@@ -22,6 +22,7 @@ class User extends Authenticatable
         'lastName',
         'email',
         'password',
+        'recievedInvitation',
     ];
 
     /**
@@ -50,7 +51,7 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsTo(Role::class,'roleId');
     }
 
     //? invitation to user 
@@ -69,12 +70,12 @@ class User extends Authenticatable
     //? the events where this user takes part
     public function events()
     {
-        return $this->belongsToMany(event::class);
+        return $this->belongsToMany(event::class,'event_user','userId','eventId');
     }
 
     //? campaigns of this user
     public function campaigns()
     {
-        return $this->belongsToMany(campaigns::class);
+        return $this->belongsToMany(Campaign::class,'campaign_user','userId','campaignId');
     }
 }

@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('invitations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('eventId')->nullable()->constrained('events')->onDelete('set null');
-            $table->string("title");
-            $table->string("object");
+            $table->foreignId('eventId')->nullable()->constrained('events')->onDelete('cascade');
+            $table->longText("object");
+            $table->longText('attachment');
         });
     }
 

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string("title");
-            $table->mediumText("object"); //? what the event is actually about
+            $table->longText("object"); //? what the event is actually about
             $table->timestamp("startingAt");
             $table->timestamp("endingAt");
             $table->string('location');

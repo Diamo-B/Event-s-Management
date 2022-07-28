@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('campaigns', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('invitationID')->constrained('invitations')->nullable()->onDelete('cascade');
+            $table->foreignId('invitationId')->constrained('invitations')->nullable()->onDelete('cascade');
+            $table->foreignId('eventId')->constrained('events')->nullable()->onDelete('cascade');
             $table->enum("status",['Original','Relanch','Complement']);
             $table->integer("relaunchNumber",false,true);
         });

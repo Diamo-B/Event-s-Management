@@ -7,7 +7,7 @@
 
     <style>
         .footer {
-            top: 750px;
+            top: 800px;
         }
 
         .footer p {
@@ -21,13 +21,17 @@
 @section('content')
     @include('navbar')
     <main>
-        <form action="{{ route('invitation.participants.import') }}" method="post" enctype="multipart/form-data" class="formCard" style="height: 600px;">
+        <form action="{{ route('invitation.store') }}" method="post" enctype="multipart/form-data" class="formCard" style="height: 650px;">
             @csrf
             <p class="header" style="width: 303px; left:216px;"> Create an Invitation</p><br><br>
 
-            <div class="formBlock" style=" top: 50px;">
-                <label for="Title" style="left: 45%">Title</label> <br>
-                <input type="text" id="Title" name="Title" required autocomplete="off"> <br>
+            <div class="formBlock" style="top:50px;">
+                <label for="Event" style="left: 43.5%">Event</label><br>
+                <select name="Event" id="Event" name="Event" style="text-align: center;">
+                @foreach ($events as $event)
+                    <option value="{{ $event->id }}">{{ $event->title }}</option>
+                @endforeach
+                </select>
             </div>
 
             <div class="formBlock" style=" top: 50px;">
@@ -36,8 +40,8 @@
             </div>
 
             <div class="formBlock" style="top:50px;">
-                <label for="participants" style="left: 39%">Participants</label><br>
-                <input type="file" name="excel" id="participants">
+                <label for="attachment" style="left: 39%">attachment</label><br>
+                <input type="file" name="attachment" id="attachment">
             </div>
 
             <button type="submit" class="submit">Create</button>

@@ -11,14 +11,14 @@ class invitationConfirmation extends Model
     public $timestamps = false; //by default timestamp true
     protected $guarded = [];  
 
-    //? the user who issued this confirmation 
+
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'userId');
     }
 
     public function event()
     {
-        return $this->belongsTo(event::class);
+        return $this->belongsTo(event::class,'eventId');
     }
 }

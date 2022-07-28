@@ -10,7 +10,7 @@ class Invitation extends Model
     use HasFactory;
     public $timestamps = false; //by default timestamp true
     protected $guarded = [];  
-
+    
 
     /*
         user to invitation
@@ -22,6 +22,16 @@ class Invitation extends Model
 
     public function event()
     {
-        return $this->belongsTo(event::class);
+        return $this->belongsTo(event::class,'eventId');
+    }
+
+    public function recipientsEmail()
+    {   
+        return $this->belongsToMany(Email::class,'email_invitation','invitationId','emailId');
+    }
+
+    public function Campaign()
+    {
+        return $this->hasOne(Campaign::class);
     }
 }

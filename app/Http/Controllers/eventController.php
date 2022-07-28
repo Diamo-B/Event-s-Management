@@ -17,8 +17,8 @@ class eventController extends Controller
     public function index()
     {
         $events = Event::latest()->simplePaginate(3);
-
-        return view('eventShow', compact('events'));
+        $search =  true;
+        return view('eventShow', compact('events','search'));
     }
 
 
@@ -92,7 +92,7 @@ class eventController extends Controller
 
         $titleOrLocation = $request->input('search');
         $foundEvent = Event::latest()->where('location', $titleOrLocation )->orWhere('title', $titleOrLocation)->simplePaginate(3);
-
+        
         return view('eventShow', compact('foundEvent'));
     }
 

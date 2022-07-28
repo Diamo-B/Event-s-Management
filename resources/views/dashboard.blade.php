@@ -48,9 +48,9 @@
             <section class="container" style="left: 1005px; top: 190px">
               <div class="containerTitle" style="top: 20px; left: 80px">Campaigns</div>
               <div class="buttonContainer">
-                  <button class="buttons" style="margin-bottom: 18px;">
+                  <a href="{{ route('campaign.create') }}"><button class="buttons" style="margin-bottom: 18px;">
                       Create a New Campaign
-                  </button>
+                  </button></a> 
         
                   <button class="buttons" style="margin-top: 5px;">
                         View Campaigns Status
