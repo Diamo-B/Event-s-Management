@@ -1,0 +1,51 @@
+.containerX {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #3B5B75;
+    border: 4px solid rgb(156, 155, 155);
+    padding: 10px;
+    border-radius: 25px;
+    font-size: large;
+}
+
+.principle
+{
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+}
+
+.secondary
+{
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+}
+.section
+{
+    color: white;
+    text-align: center;
+}
+.del {
+    color: white;
+    position: relative;
+    width: 300px;
+    padding: 5px 0;
+    border: 3px solid white;
+    font-weight: 600;
+    background-color: #15f082;
+    border-radius: 20px;
+}
+
+.del:hover {
+    background-color: white;
+}
+
+.del:hover span {
+    color: #232427;
+}

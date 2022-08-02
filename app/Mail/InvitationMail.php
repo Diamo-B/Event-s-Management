@@ -16,9 +16,10 @@ class InvitationMail extends Mailable
     public $eventData;
     public $campaignData;
     public $dataRecipient;
+    public $inviteToken;
    
     
-    public function __construct($data,$recipient,$status,$invitation,$event,$Campaign)
+    public function __construct($data,$recipient,$status,$invitation,$event,$Campaign,$inviteToken)
     {
         
         $this->dataRecipient = $data;                 //^ done
@@ -26,6 +27,7 @@ class InvitationMail extends Mailable
         $this->CampaignStatus = $status;            //^ done
         $this->invitationData = $invitation;       //^ done
         $this->eventData = $event;                //^ done
+        $this->inviteToken= $inviteToken;
         $this->campaignData = $Campaign;
     }
 
@@ -38,16 +40,5 @@ class InvitationMail extends Mailable
     {
         return $this->subject('Event Invitation')->view('emails.InvitationMail')
         ->attach(storage_path('app\public\attachments'.'\\'.$this->invitationData['attachmentName']),['as' => $this->invitationData['attachmentName']]);
-    }
-
-    public function deleteFileFromStorage($filePath)
-    {
-        if(Storage::exists($filePath))
-        {
-            Storage::delete($filePath);
-        }else
-        {
-            dd('File does not exists.');
-        }
     }
 }

@@ -16,6 +16,8 @@
             {{ $invitationData->object }}
         </p>
         <br>
+        <p>To Accept the invitation please press the button</p>
+            <a href="{{ route('AcceptInvite', $inviteToken) }}"><button>Accept the invitation</button></a>
         <p>
             See you there, <br>
             <strong>WebMaster</strong>

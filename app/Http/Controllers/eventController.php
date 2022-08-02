@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 
@@ -16,7 +17,8 @@ class eventController extends Controller
      */
     public function index()
     {
-        $events = Event::latest()->simplePaginate(3);
+        $events = Event::latest()->where('endingAt','>',Carbon::now())->simplePaginate(3);
+
         $search =  true;
         return view('eventShow', compact('events','search'));
     }

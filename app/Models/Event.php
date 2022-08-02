@@ -25,7 +25,7 @@ class Event extends Model
         return $this->belongsToMany(User::class,'event_user','eventId', 'userId');
     }
 
-    public function confirmations()
+    public function inviteConfirmations()
     {
         return $this->hasMany(inviteConfirmation::class);
     }

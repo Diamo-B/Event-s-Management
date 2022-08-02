@@ -17,6 +17,7 @@ return new class extends Migration {
         Schema::create('event_user', function (Blueprint $table) {
             $table->foreignId('eventId')->constrained('events')->onDelete('cascade');
             $table->foreignId('userId')->constrained('users')->onDelete('cascade');
+            $table->string('inviteToken')->nullable();
         });
     }
 

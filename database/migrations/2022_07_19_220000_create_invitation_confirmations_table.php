@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('userId')->nullable()->constrained('users')->onDelete('cascade');
             $table->foreignId('eventId')->nullable()->constrained('events')->onDelete('cascade');
-            $table->boolean('isConfirmed');
-            $table->boolean('isPresent');
+            $table->boolean('isConfirmed')->default(false);
+            $table->boolean('isPresent')->default(false);
         });
     }
 

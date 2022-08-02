@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class mailController extends Controller
 {
@@ -44,24 +45,39 @@ class mailController extends Controller
             if (!(in_array($recipient,$participantsEmails))) 
             {
                 
-                $this->makeUser($userIndex,$data,$role);
+                $this->makeUser($request,$userIndex,$data,$role);
             }
 
             //* make relationship between the event and recipients
             $user =  User::where('email',$recipient)->get()[0];
-            $user->events()->attach($event);
+            $hasLinkWithEvent = $user->events()->where('id', $event->id)->exists();
+            if ($hasLinkWithEvent == false) 
+            {
+                $user->events()->attach($event);
+
+                //*Create InviteToken
+                $inviteToken = Str::random(40);
+            
+                DB::update('UPDATE event_user set inviteToken = ? where eventId = ? and userId = ?',[$inviteToken,$event->id,$user->id]);
+            }
+            else 
+            {
+                $arrayInviteToken = DB::select('SELECT inviteToken FROM event_user WHERE eventId = ? and userId= ?', [$event->id,$user->id]);
+                $inviteToken = $arrayInviteToken[0]->inviteToken;
+            }
+            
 
             //* make the relationship between the campaign and the recipients
             $user->campaigns()->attach($Campaign);
 
             //* Send the data to the mailer function
-            Mail::to($recipient)->send(new \App\Mail\InvitationMail($data[$userIndex],$recipient,$status,$invitation,$event,$Campaign));
+            Mail::to($recipient)->send(new \App\Mail\InvitationMail($data[$userIndex],$recipient,$status,$invitation,$event,$Campaign,$inviteToken));
             sleep(2);
         }
        
     }
 
-    public function makeUser($userIndex,$data,$role)
+    public function makeUser($request,$userIndex,$data,$role)
     {
         $newUser = new User(
             [
@@ -71,6 +87,7 @@ class mailController extends Controller
                 'password' =>Hash::make('password'),
             ]
         );   
+        
         $newUser->role()->associate($role)->save();
         return;
     }

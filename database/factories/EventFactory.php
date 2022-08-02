@@ -19,8 +19,8 @@ class EventFactory extends Factory
         return [
             'title' => fake()->sentence($nbWords = 5, $variableNbWords = true),
             'object' => fake()->sentence($nbWords = 30, $variableNbWords = true),
-            'startingAt' => Carbon::now(),
-            'endingAt' => Carbon::tomorrow(),
+            'startingAt' => Carbon::tomorrow(),
+            'endingAt' => new Carbon('first day of January 2023'),
             'location' => fake()->city(),
             'room' => fake()->word(),
         ];

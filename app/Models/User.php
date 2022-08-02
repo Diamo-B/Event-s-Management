@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -22,7 +21,6 @@ class User extends Authenticatable
         'lastName',
         'email',
         'password',
-        'recievedInvitation',
     ];
 
     /**
@@ -72,6 +70,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(event::class,'event_user','userId','eventId');
     }
+
 
     //? campaigns of this user
     public function campaigns()
