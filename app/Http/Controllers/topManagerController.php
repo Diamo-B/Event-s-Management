@@ -10,7 +10,6 @@ use DateTime;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Mockery\Generator\StringManipulation\Pass\Pass;
 
 class topManagerController extends Controller
 {

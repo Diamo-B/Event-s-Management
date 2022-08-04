@@ -45,7 +45,7 @@
     <main class="Xcontainer">
         @isset($events)
             <div class="bigBox">
-
+                
                 <div class="header">
                     <h1>Events</h1>
                     <h2>Choose an event</h2>
@@ -104,7 +104,7 @@
                     <form method="POST"
                         action="{{ route('presenceConfirm', ['eventId' => $event['id'], 'campaigns' => $Campaigns->toJson(JSON_PRETTY_PRINT)]) }}">
                         @csrf
-                        <button class="confirm" type="submit"><span>confirm Participants attendance</span></button>
+                        <button class="confirm" type="submit"><span>confirm Participants attandance</span></button>
                     </form>
 
                 </div>
@@ -130,12 +130,14 @@
                                 <td data-label="First name">{{ $user['firstName'] }}</td>
                                 <td data-label="Last name">{{ $user['lastName'] }}</td>
                                 <td data-label="Email">{{ $user['email'] }}</td>
-                                <td data-label="Is present"><input type="checkbox" name="presentUserIds[]" value="{{ $user['id'] }}"></td>
+                                <td data-label="Is present"><input type="checkbox" name="presentUserIds[]"
+                                        value="{{ $user['id'] }}"></td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-                <button type="submit" class="confirm" style="padding-left: 50px; padding-right: 50px;"><span>Confirm</span></button>
+                <button type="submit" class="confirm"
+                    style="padding-left: 50px; padding-right: 50px;"><span>Confirm</span></button>
             </form>
         @endisset
     </main>

@@ -6,6 +6,7 @@ use App\Http\Controllers\eventController;
 use App\Http\Controllers\mailController;
 use App\Http\Controllers\invitationController;
 use App\Http\Controllers\topManagerController;
+use App\Http\Controllers\StatsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,8 +49,11 @@ Route::any('/Invite/AcceptInvitation/{token}',[invitationController::class,'Acce
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //* TopManager routes
+//? data
 Route::any('Data/{eventId?}',[topManagerController::class, 'getData'])->middleware(["auth"])->name('realTimeData');
 Route::any('History/{eventId?}',[topManagerController::class, 'getData'])->middleware(["auth"])->name('history');
-
-
+//? stats
+Route::any('stats/data',[StatsController::class, 'DataStats'])->middleware(["auth"])->name('DataStats');
+Route::any('stats/history',[StatsController::class, 'HistoryStats'])->middleware(["auth"])->name('HistoryStats');
+Route::post('stats/{type?}/show',[StatsController::class ,'ShowStats'])->middleware(['auth'])->name('showStats');
 require __DIR__.'/auth.php';

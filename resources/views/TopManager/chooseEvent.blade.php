@@ -38,29 +38,45 @@
             color: #000031;
         }
     </style>
-    </style>
 @endsection
 
 @section('content')
     @include('navbar')
     @isset($events)
         <div class="Xcontainer">
-
+            @if (session('error'))
+                <div style="position: relative; top:49px; padding:1rem; margin-bottom: 1rem; font-size: 16px; font-weight: 700; border-radius: 25px; line-height: 1.25rem; --tw-text-opacity: 1; color:  rgba(185,28,28,var(--tw-text-opacity)); --tw-bg-opacity: 1; background-color:  rgba(254,226,226,var(--tw-bg-opacity)); text-align: center;"
+                role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
             <div class="bigBox">
 
                 <div class="header">
                     <h1>Events</h1>
                     <h2>Choose an event</h2>
                 </div>
-                <form action="" method="post">
-                    @csrf
-                    <select name="Event">
-                        @foreach ($events as $event)
-                            <option value="{{ $event->id }}">{{ $event->title }}</option>
-                        @endforeach
-                    </select>
-                    <br>
+                @if (isset($type) && $type == 'DataStat')
+                    <form action="{{ route('showStats', ['type' => 'data']) }}" method="post">
+                    @elseif (isset($type) && $type == 'HistoryStat')
+                        <form action="{{ route('showStats', ['type' => 'history']) }}" method="post">
+                        @else
+                            <form action="" method="post">
+                @endif
+
+                @csrf
+                <select name="Event">
+                    @foreach ($events as $event)
+                        <option value="{{ $event->id }}">{{ $event->title }}</option>
+                    @endforeach
+                </select>
+                <br>
+                @if (isset($type))
+                    <button type="submit" class="button"><span>Show Event's Stats</span></button>
+                @else
                     <button type="submit" class="button"><span>Show Event's Data</span></button>
+                @endif
+
                 </form>
 
             </div>
@@ -104,8 +120,9 @@
                     <p class="details">{{ $details->room }}</p>
                 </div>
             </div>
-            <a href="{{ route('realTimeData', $details->id) }}"><button class="del"
-                    style="width:200px; margin: 10px 0px; padding:10px; left:35%"><span>view Campaigns</span></button></a>
+            <a href="{{ route('realTimeData', $details->id) }}" style="display: flex; flex-direction: row;flex-wrap: nowrap; justify-content: space-around; text-decoration:none;">
+                <button class="del" style="width:200px; margin: 10px 0px; padding:10px;"><span>view Campaigns</span></button>
+            </a>
         </div>
     @endisset
     @isset($campaignCount)
@@ -161,7 +178,7 @@
                     <tr>
                         <th scope="col">First name</th>
                         <th scope="col">Last name</th>
-                        <th scope="col" style = 'width:200px;'>Email</th>
+                        <th scope="col" style='width:200px;'>Email</th>
                         <th scope="col">Confirmed</th>
                         <th scope="col">Attended</th>
                     </tr>

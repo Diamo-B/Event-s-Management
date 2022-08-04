@@ -178,7 +178,8 @@ class campaigncontroller extends Controller
             $users = array();
             foreach ($userIds as $id) 
             {
-                $acceptedUser = DB::select('select * from invitation_confirmations where userId = ? and eventId = ? and isConfirmed = 1',[$id,$eventId]);
+                $acceptedUser = DB::select('select * from invitation_confirmations where userId = ? and eventId = ? and isConfirmed = 1 and isPresent = 0',[$id,$eventId]);
+                
                 if ($acceptedUser != null) 
                 {
                     $user = User::find($id)->toArray();

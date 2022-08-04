@@ -60,7 +60,7 @@
     @elseif($role == 2)
         <!--TopManager's Dashboard-->
       
-        <section class="container" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);">
+        <section class="container" style="position: absolute;top: 50%;left: 35%;transform: translate(-50%, -50%);">
             <div class="containerTitle" style="top: 20px; left: 95.5px">Options</div>
             <div class="buttonContainer">
               @method('get')
@@ -70,6 +70,20 @@
 
               <a href="{{ route('history') }}"><button class="buttons" style="margin-top: 5px;">
                       View Event History
+                  </button></a>
+
+            </div>
+        </section>
+
+        <section class="container" style="position: absolute;top: 50%;left: 65%;transform: translate(-50%, -50%);">
+            <div class="containerTitle" style="top: 20px; left: 95.5px">Statistics</div>
+            <div class="buttonContainer">
+              <a href="{{ route('DataStats') }}"><button class="buttons" style="margin-bottom: 18px;">
+                      View Real Time Stats
+                  </button></a>
+
+              <a href="{{ route('HistoryStats') }}"><button class="buttons" style="margin-top: 5px;">
+                    View History Stats 
                   </button></a>
 
             </div>
