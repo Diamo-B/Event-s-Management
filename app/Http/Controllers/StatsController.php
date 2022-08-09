@@ -3,23 +3,52 @@
 namespace App\Http\Controllers;
 
 use App\Models\Campaign;
+use App\Models\Event;
+use App\Models\Invitation;
 use App\Models\User;
 use Brick\Math\Exception\DivisionByZeroException;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use DivisionByZeroError;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+
+use function PHPUnit\Framework\isNull;
 
 class StatsController extends Controller
 {
+    public function paginate(Request $request, $items, $perPage = 10, $page = null, $options=[])
+    {
+        $page = isset($request->page) ? $request->page : 1; // Get the page=1 from the url
+        /* $page = $page ?: (Paginator::resolveCurrentPage() ?: 1); */
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+
+        return new LengthAwarePaginator(
+            $items->forPage($page, $perPage), $items->count(), $perPage, $page,
+            ['path' => $request->url()],
+        );
+    }
+
     public function DataStats(Request $request)
     {
-        if ($request->isMethod('POST')) {
+        if ($request->isMethod('POST')) 
+        {
             return $this->ShowStats($request);
-        } else {
+        } else 
+        {
             $type = 'DataStat';
-            $events = \App\Models\Event::all()->where('endingAt', '>', Carbon::now()); //=> the events that have not started yet or on going
-            return view('TopManager.chooseEvent', compact('events', 'type'));
+            $notStartedOrOngoingEvents = \App\Models\Event::all()->where('endingAt', '>', Carbon::now('GMT+1')); //=> the events that have not started yet or on going
+            $events = array();
+            foreach ($notStartedOrOngoingEvents as $event) {
+                $X = Campaign::all()->where('eventId',$event->id)->toArray(); 
+                if (!empty($X))
+                {
+                    array_push($events,$event);
+                }
+            }
+            $events = $this->paginate($request,$events);
+            return view('events.show', compact('events', 'type'));
         }
     }
 
@@ -29,8 +58,18 @@ class StatsController extends Controller
             return $this->ShowStats($request);
         } else {
             $type = 'HistoryStat';
-            $events = \App\Models\Event::all()->where('endingAt', '<=', Carbon::now()); //=> the events that have ended
-            return view('TopManager.chooseEvent', compact('events', 'type'));
+            $endedEvents = \App\Models\Event::all()->where('endingAt', '<=', Carbon::now('GMT+1')); //=> the events that have ended
+            $events = array();
+            foreach ($endedEvents as $event) 
+            {
+                $X = Campaign::all()->where('eventId',$event->id)->toArray(); 
+                if (!empty($X))
+                {
+                    array_push($events,$event);
+                }
+            }
+            $events = $this->paginate($request,$events);
+            return view('events.show', compact('events', 'type'));
         }
     }
 
@@ -38,6 +77,7 @@ class StatsController extends Controller
 
     public function ShowStats(Request $request)
     {
+        
         //! get all the ids of the users that have 'participant' as their role
         $participantIds = array();
         $participants = User::all()->where('roleId', 3)->toArray();
@@ -47,10 +87,11 @@ class StatsController extends Controller
         $participantIds = array_values($participantIds);
 
         //------------------------------------------------------------------------------------------------------------------------------------------
-        $eventId = $request->input('Event');
+        $eventId = $request->input('Events');
+        
         $event = array_values(\App\Models\Event::all()->where('id', $eventId)->toArray())[0]; //=> The event itself
         $Campaigns =  array_values(Campaign::all()->where("eventId", $eventId)->toArray()); //=> Every single Campaign of this event
-
+        //dd($eventId,$event,$Campaigns);
         //! store the userIds of every Campaign into one single array without duplications (find the invited users)
         $CampaignsUserIds = array();
         foreach ($Campaigns as $Camp) {
@@ -118,6 +159,46 @@ class StatsController extends Controller
 
         /* dd("the participant ids:",$participantIds,"the event:",$event,"the invited users ids:",$invitedUsersIds,"invited users count:",$invitedUsersCount,'ids of the users who accepted the invitation:',$acceptedUsersIds,'the count of the users who accepted the invitation:',$acceptedUsersCount,'the users who attended the event:', $attendedUsersIds, 'the count of the users who attended the event:',$attendedUsersCount, 'the invitation rate: the invited users compared to the totality of the participants',round($userInvitationRate,PHP_ROUND_HALF_UP).'%','Rate of the users who accepted their invitations compared to the total of invited users:', round($invitationConfirmationRate,PHP_ROUND_HALF_UP).'%','Rate of the invited users who actually attended the event:',round($eventAttendanceRate,PHP_ROUND_HALF_UP).'%','Rate of the users who attended the event compared to the totality of participants:',round($eventAttendance_Total,PHP_ROUND_HALF_UP).'%'); */
 
-        return view('TopManager.Stats.actualStats', compact('participantIds', 'invitedUsersCount', 'acceptedUsersCount', 'attendedUsersCount', 'userInvitationRate', 'invitationConfirmationRate', 'eventAttendanceRate', 'eventAttendance_Total'));
+        return view('Stats.actualStats', compact('participantIds', 'invitedUsersCount', 'acceptedUsersCount', 'attendedUsersCount', 'userInvitationRate', 'invitationConfirmationRate', 'eventAttendanceRate', 'eventAttendance_Total'));
+    }
+
+    public function general(Request $request)
+    {
+        //! events count
+        $events = \App\Models\Event::all()->count(); 
+        //! ongoing events count
+        $ongoingEvents =  \App\Models\Event::all()->where('startingAt', '<', Carbon::now('GMT+1'))->where('endingAt', '>', Carbon::now('GMT+1'))->count(); 
+        //! notStartedYet events count
+        $notStartedYetEvents = \App\Models\Event::all()->where('startingAt', '>', Carbon::now('GMT+1'))->count(); 
+        //! ended Events count
+        $endedEvents = \App\Models\Event::all()->where('endingAt', '<=', Carbon::now('GMT+1'))->count(); 
+        //! participants count
+        $participants = User::all()->where('roleId',3)->count();
+        //! invitations count
+        $invites = count(DB::select('select * from event_user')); //- [II]
+
+        //! total invitation acceptance rate (count of accepted invitations in all events[I] / count of invitations in all events[II] *100 )
+        $acceptedInvites = count(DB::select('select * from invitation_confirmations where isConfirmed = 1')); //- [I]
+        $acceptanceRate = ($acceptedInvites / $invites) * 100;
+
+        //dd($acceptedInvites,$invites,$acceptanceRate);
+        //! total attandance rate (count of attandance in all events[III] / count of invitations in all events[II] * 100)
+        $attandanceCount = count(DB::select('select * from invitation_confirmations where isPresent = 1')); //- [III]
+        $attandanceRate = ($attandanceCount / $invites) * 100;
+
+
+        //! total absence rate (count of absence in all events[IV] / count of invitations in all events[II] * 100)
+        $absenceCount = count(DB::select('select * from invitation_confirmations where isPresent = 0')); //- [IV]
+        $absenceRate = ($absenceCount/$invites)*100;
+
+        if($request->isMethod('post'))
+        {
+            $adv = true;
+            return view('Stats.fullStats',compact('acceptanceRate','attandanceRate','absenceRate','adv'));
+        }
+        else
+        {
+            return view('Stats.fullStats',compact('events','ongoingEvents','notStartedYetEvents','endedEvents','participants','invites'));
+        }
     }
 }

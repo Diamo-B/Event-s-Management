@@ -33,12 +33,13 @@ class invitationController extends Controller
         foreach ($events as $event) 
         {
             $starting = new DateTime($event->startingAt);
-            if($starting > Carbon::now())
+            if($starting > Carbon::now('GMT+1'))
             {
                 array_push($notStartedYetEvents,$event);
             }
         }
         $events = $notStartedYetEvents;
+    
         return view('invitation.create', compact('events'));
     }
 
@@ -52,8 +53,9 @@ class invitationController extends Controller
         $request->validate([
             'Event' => 'required',
             'Body' => 'required',
-            'attachment' => 'file|mimes:txt,docx,doc,csv,xlx,xls,xlsx,pdf|max:2048',
+            'attachment' => 'file|mimes:txt,docx,doc,csv,xlx,xls,xlsx,pdf',
         ]);
+        
 
         $eventID = $request->input('Event');
         $event = Event::find($eventID);
@@ -135,13 +137,13 @@ class invitationController extends Controller
             
             //=> finally we fetch all the events that the $eventsWithInvitation array contain their Id
             $events = Event::all()->whereIn('id', $eventsWithInvitation);
-            
-            return view('invitation.viewInvitations', compact('events'));
+            $Inv = true;
+            return view('ChooseEvent', compact('events','Inv'));
 
         } else 
         {
             //^ If the form was submited: We need to show the invitation object and attachment name, a link to download it and a link to delete it
-
+            
             $eventId = $request->input('Events');
             $event = \App\Models\Event::find($eventId)->toArray();
 

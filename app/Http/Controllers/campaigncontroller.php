@@ -116,7 +116,8 @@ class campaigncontroller extends Controller
     public function index(Request $request)
     {
         //- First check if the form is submited
-        if ($request->input('Event') == null) {
+        if ($request->input('Events') == null) 
+        {
             //^ If not: We are taking only the events that already have a Campaign by following these steps:
 
             //=> First fetch all the Campaigns
@@ -132,14 +133,14 @@ class campaigncontroller extends Controller
             
             //=> finally we fetch all the events that the $eventsWithInvitation array contain their Id
             $events = Event::all()->whereIn('id', $eventsWithCampaigns);
-            
-            return view('Campaign.viewCampaign',compact('events'));
+            $Camp = true;
+            return view('ChooseEvent',compact('events','Camp'));
 
         } else 
         {
             //^ If the form was submited: We need to show the Campaigns, the relaunch number if it was a relaunch or a complement 
             
-            $eventId = $request->input('Event');
+            $eventId = $request->input('Events');
             $event = \App\Models\Event::all()->find($eventId)->toArray();
 
             $Campaigns = Campaign::all()->where('eventId',$eventId);
@@ -156,6 +157,7 @@ class campaigncontroller extends Controller
     public function presenceConfirm(Request $request,$eventId,$campaigns=null)
     {
         $presentUserIds = $request->input('presentUserIds');
+        
         if (isset($presentUserIds)==false) 
         {
 
@@ -194,9 +196,8 @@ class campaigncontroller extends Controller
             foreach ($presentUserIds as $id )
             {
                 invitationConfirmation::where('eventId',$eventId)->Where('userId',$id)->update(['isPresent'=>true]); 
-            
-                return redirect(route('dashboard'));
             }
+            return redirect(route('dashboard'));
         }
     }
 }

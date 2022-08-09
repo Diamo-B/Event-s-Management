@@ -1,10 +1,8 @@
 @extends('app')
 
 @section('css')
-    <link rel="stylesheet" href="{{ URL::asset('css/footer.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/navbar.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/circleDiagrams.css') }}">
-    <script src="https://cdn.tailwindcss.com"></script>
 @endsection
 
 @section('content')

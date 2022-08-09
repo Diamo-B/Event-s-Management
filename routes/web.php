@@ -56,4 +56,8 @@ Route::any('History/{eventId?}',[topManagerController::class, 'getData'])->middl
 Route::any('stats/data',[StatsController::class, 'DataStats'])->middleware(["auth"])->name('DataStats');
 Route::any('stats/history',[StatsController::class, 'HistoryStats'])->middleware(["auth"])->name('HistoryStats');
 Route::post('stats/{type?}/show',[StatsController::class ,'ShowStats'])->middleware(['auth'])->name('showStats');
+
+//? General stat
+Route::any('stats/general',[StatsController::class,'general'])->middleware(["auth"])->name('showFullStack');
+
 require __DIR__.'/auth.php';

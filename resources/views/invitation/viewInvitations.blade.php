@@ -1,105 +1,56 @@
 @extends('app')
 
-@section('css')
-    <link rel="stylesheet" href="{{ URL::asset('css/navbar.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/footer.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/container.css') }}">
-    <style>
-
-        .infoTable {
-            margin: 20px;
-            text-align: center;
-        }
-
-        table,
-        th,
-        td {
-            border: 3px solid white;
-            padding: 10px;
-        }
-
-        #header {
-            color: #20DF7F;
-            font-size: 20px;
-        }
-
-        .body {
-            color: white;
-            font-size: 20px;
-        }
-
-        .body a {
-            text-decoration: underline;
-            color: pink;
-        }
-
-        .del {
-            color: white;
-            font-size: 15px;
-            border: 3px solid white;
-            margin-bottom: 20px;
-            padding: 10px 50px;
-            border-radius: 20px;
-            font-weight: 700;
-            background-color: #15f082;
-        }
-
-        .del:hover {
-            background: white;
-        }
-
-        .del:hover span {
-            color: #232427;
-        }
-    </style>
-@endsection
-
 @section('content')
     @include('navbar')
+    <main class="grid justify-center mx-[50%] mt-10 mb-32">
 
-    <main class="Xcontainer">
-        <div class="bigBox">
-            @isset($events)
-                <div class="header">
-                    <h1>Events</h1>
-                    <h2>Choose an event</h2>
+        <div class="flex text-center rounded-full justify-center">
+            <div class="bg-indigo-400 py-10 px-28 border-4 border-indigo-500 rounded-lg ">
+
+                <h1 class="mb-5 text-center text-4xl text-white font-bold">Invitation details</h1>
+
+                <div class="mb-5 overflow-x-auto relative shadow-md sm:rounded-lg">
+                    <table class="w-full border-2 border-gray-300  text-sm text-center  text-gray-500">
+                        <thead class="text-xs text-gray-700 border  border-b-gray-300 uppercase bg-white ">
+                            <tr>
+                                <th scope="col" class="py-3 inline-block pr-60 pl-10">
+                                    Event
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    attachment
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b hover:bg-gray-300 hover:text-white group">
+                                <th scope="row"
+                                    class="py-4 pl-10 font-medium text-left text-gray-900  whitespace-nowrap ">
+                                    {{ $event['title'] }}
+                                </th>
+                                <td class="py-4 px-6 group-hover:text-gray-900 ">
+                                    <a class="hover:font-semibold" href="{{ route('download.attachment', ['attachment' => $invitation['attachmentName']]) }}">
+                                        {{ $invitation['attachmentName'] }}
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <form action="{{ route('invitation.index') }}" method="post">
-                    @csrf
-                    <select name="Events">
-                        @foreach ($events as $event)
-                            <option value="{{ $event->id }}">{{ $event->title }}</option>
-                        @endforeach
-                    </select>
-                    <br>
-                    <button type="submit" class="button"><span>Find Invitation</span></button>
-                </form>
-            @endisset
-            @isset($invitation)
-                <table class="infoTable">
-                    <tr id="header">
-                        <th>Event</th>
-                        <th>Object</th>
-                        <th>Attachment</th>
-                    </tr>
-
-                    <tr class="body">
-                        <td>{{ $event['title'] }}</td>
-                        <td>{{ $invitation['object'] }}</td>
-                        <td>
-                            <a href="{{ route('download.attachment', ['attachment' => $invitation['attachmentName']]) }}">
-                                {{ $invitation['attachmentName'] }}
-                            </a>
-                        </td>
-                    </tr>
-                </table>
-                <form action="{{ route('invitation.delete', ['id' => $invitation['id']]) }}" method="POST">
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="del"><span>Delete</span></button>
-                </form>
-            @endisset
+                <h2 class="mb-2 text-center text-lg text-white font-bold">Description</h2>
+                <p class=" mb-10 text-base text-white">
+                    {{ $invitation['object'] }}
+                </p>
+            
+            {{-- <form action="{{ route('invitation.delete', ['id' => $invitation['id']]) }}" method="POST">
+                @csrf
+                @method('delete')
+                <button type="submit" class="focus:ring-0 w-[50%]  border-4 border-white rounded-3xl px-8 py-1 hover:bg-white group  ">
+                    <span class="text-center text-white text-lg font-semibold group-hover:text-indigo-500 group-hover:font-bold">Delete Invitation</span>
+                </button>
+            </form> --}}
+        </div>
         </div>
     </main>
+
     @include('footer')
 @endsection
