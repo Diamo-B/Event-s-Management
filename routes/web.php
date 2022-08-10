@@ -9,23 +9,20 @@ use App\Http\Controllers\topManagerController;
 use App\Http\Controllers\StatsController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
 //* Dashboard
 Route::get('/dashboard',[dashboardController::class,'index'])->middleware(['auth'])->name('dashboard'); 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //*events
-Route::resource('event',eventController::class)->middleware(['auth']);
+//Route::resource('event',eventController::class)->middleware(['auth']);
+Route::get('event',[eventController::class, 'index'])->middleware(['auth'])->name('event.index');
+Route::post('event',[eventController::class, 'store'])->middleware(['auth'])->name('event.store');
+Route::get('event/create',[eventController::class, 'create'])->middleware(['auth'])->name('event.create');
 Route::any('event/search',[eventController::class,'search'])->middleware(['auth'])->name('event.search');
+Route::get('event/{event}',[eventController::class,'show'])->middleware(['auth'])->name('event.show');
+Route::delete('event/{event}',[eventController::class,'destroy'])->middleware(['auth'])->name('event.destroy');
+
 
 //*invitation
 Route::get('invitation',[invitationController::class,'create'])->middleware(['auth'])->name('invitation.create');

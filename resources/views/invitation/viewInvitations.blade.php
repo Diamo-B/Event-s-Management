@@ -28,7 +28,7 @@
                                     {{ $event['title'] }}
                                 </th>
                                 <td class="py-4 px-6 group-hover:text-gray-900 ">
-                                    <a class="hover:font-semibold" href="{{ route('download.attachment', ['attachment' => $invitation['attachmentName']]) }}">
+                                    <a class="hover:text-black" href="{{ route('download.attachment', ['attachment' => $invitation['attachmentName']]) }}">
                                         {{ $invitation['attachmentName'] }}
                                     </a>
                                 </td>
@@ -40,14 +40,6 @@
                 <p class=" mb-10 text-base text-white">
                     {{ $invitation['object'] }}
                 </p>
-            
-            {{-- <form action="{{ route('invitation.delete', ['id' => $invitation['id']]) }}" method="POST">
-                @csrf
-                @method('delete')
-                <button type="submit" class="focus:ring-0 w-[50%]  border-4 border-white rounded-3xl px-8 py-1 hover:bg-white group  ">
-                    <span class="text-center text-white text-lg font-semibold group-hover:text-indigo-500 group-hover:font-bold">Delete Invitation</span>
-                </button>
-            </form> --}}
         </div>
         </div>
     </main>

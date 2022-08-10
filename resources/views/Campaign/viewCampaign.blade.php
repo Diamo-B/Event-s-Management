@@ -40,29 +40,35 @@
                                 @endif
                                 </p>
                             @endif
+                            <br>
+                            @if ($stop == true)
+                                <p>where all the users were confirmed as present</p>
+                            @endif
                         </div>
 
                         
                         
                         @if ($CampaignsCount != 0)
-                        @if(isset($viewData))
-                        <form method="POST"
-                        action="{{ route('realTimeData', ['eventId' => $event['id']]) }}">
-                        @csrf
-                        <button type="submit" class="focus:ring-0 border-4 border-white rounded-3xl mx-5 px-8 py-1 hover:bg-white group  ">
-                            <span class="text-center text-white text-lg font-bold group-hover:text-indigo-500 group-hover:font-bold">view participants attandance</span>
-                        </button>
-                        @else
-                        <form method="POST"
-                        action="{{ route('presenceConfirm', ['eventId' => $event['id'], 'campaigns' => $Campaigns->toJson(JSON_PRETTY_PRINT)]) }}">
-                        @csrf
-                        <button type="submit" class="focus:ring-0 border-4 border-white rounded-3xl mx-5 px-8 py-1 hover:bg-white group  ">
-                            <span class="text-center text-white text-lg font-bold group-hover:text-indigo-500 group-hover:font-bold">Confirm participants attandance</span>
-                        </button>
-                        </form>
-                        @endif
+                            @if(isset($viewData))
+                                <form method="POST"
+                                action="{{ route('realTimeData', ['eventId' => $event['id']]) }}">
+                                @csrf
+                                <button type="submit" class="focus:ring-0 border-4 border-white rounded-3xl mx-5 px-8 py-1 hover:bg-white group  ">
+                                    <span class="text-center text-white text-lg font-bold group-hover:text-indigo-500 group-hover:font-bold">view participants attandance</span>
+                                </button>
+                            @elseif (!isset($viewData) && $stop == false)
+                                <form method="POST"
+                                action="{{ route('presenceConfirm', ['eventId' => $event['id'], 'campaigns' => $Campaigns->toJson(JSON_PRETTY_PRINT)]) }}">
+                                @csrf
+                                <button type="submit" class="focus:ring-0 border-4 border-white rounded-3xl mx-5 px-8 py-1 hover:bg-white group  ">
+                                    <span class="text-center text-white text-lg font-bold group-hover:text-indigo-500 group-hover:font-bold">Confirm participants attandance</span>
+                                </button>
+                                </form>
+                            @endif
                         @endif
                     </div>
+                </div>
+                
                 @endisset
 
                 @if(isset($users) or isset($viewusers))
@@ -71,7 +77,7 @@
                         @csrf
                     @endisset
                     
-                        <div class="grid justify-items-center ">
+                        <div class="grid justify-items-center mt-48 mb-20">
                             <div class="overflow-x-auto mb-5 relative shadow-2xl  sm:rounded-lg">
                                 <table class="w-full text-base text-center  text-gray-500">
                                     <thead class="text-sm text-gray-700 bg-indigo-400 ">

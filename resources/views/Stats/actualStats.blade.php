@@ -13,10 +13,10 @@
         <div class="w-full max-w-3xl">
             <div class="w-full mt-1">
                 <div class="rounded-lg shadow-sm">
-                    <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden text-center">
-                        <h3 class="relative top-5 text-center font-bold text-orange-500">Invited Users</h3>
-                        <p class="text-5xl mt-8 font-bold text-teal-500">{{ $invitedUsersCount }} </p> 
-                        <p class="text-base mt-3 mb-8 font-bold text-gray-400">from {{ count($participantIds) }} users with participant role</p>
+                    <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden text-center hover:bg-indigo-400 group">
+                        <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Invited Users</h3>
+                        <p class="text-5xl mt-8 font-bold text-teal-500 group-hover:text-pink-300">{{ $invitedUsersCount }} </p> 
+                        <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">from {{ count($participantIds) }} users with participant role</p>
                     </div>
                 </div>
             </div>
@@ -25,10 +25,10 @@
         <div class="w-full max-w-3xl">
             <div class="w-full mt-1">
                 <div class="rounded-lg shadow-sm">
-                    <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden text-center">
-                        <h3 class="relative top-5 text-center font-bold text-orange-500">Confirmed Users</h3>
-                        <p class="text-5xl mt-8 font-bold text-teal-500">{{ $acceptedUsersCount }} </p> 
-                        <p class="text-base mt-3 mb-8 font-bold text-gray-400">from {{ $invitedUsersCount }} invited users</p>
+                    <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden text-center hover:bg-indigo-400 group">
+                        <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Confirmed Users</h3>
+                        <p class="text-5xl mt-8 font-bold text-teal-500 group-hover:text-pink-300">{{ $acceptedUsersCount }} </p> 
+                        <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">from {{ $invitedUsersCount }} invited users</p>
                     </div>
                 </div>
             </div>
@@ -37,10 +37,10 @@
         <div class="w-full max-w-3xl">
             <div class="w-full mt-1">
                 <div class="rounded-lg shadow-sm">
-                    <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden text-center">
-                        <h3 class="relative top-5 text-center font-bold text-orange-500">Attanded Users</h3>
-                        <p class="text-5xl mt-8 font-bold text-teal-500">{{ $attendedUsersCount }} </p> 
-                        <p class="text-base mt-3 mb-8 font-bold text-gray-400">from {{ $acceptedUsersCount  }} confirmed users</p>
+                    <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden text-center hover:bg-indigo-400 group">
+                        <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Attanded Users</h3>
+                        <p class="text-5xl mt-8 font-bold text-teal-500 group-hover:text-pink-300">{{ $attendedUsersCount }} </p> 
+                        <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">from {{ $acceptedUsersCount  }} confirmed users</p>
                     </div>
                 </div>
             </div>
@@ -49,9 +49,9 @@
         <div class="w-full max-w-3xl">
             <div class="w-full mt-1">
                 <div class="rounded-lg shadow-sm">
-                    <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden">
-                        <h3 class="relative top-5 text-center font-bold text-orange-500">Invitation Rate</h3>
-                        <h4 class="relative top-6 text-center font-bold text-gray-400">Invited users against all the participant role </h4>
+                    <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:bg-indigo-400 group">
+                        <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Invitation Rate</h3>
+                        <h4 class="relative top-6 text-center font-bold text-gray-400 group-hover:text-white">Invited users against all the participant role </h4>
                         <div class="circleDiv">
                             <div class="circle-diagram" style="--percent: {{ round($userInvitationRate,PHP_ROUND_HALF_UP) }}">
                                 <p class="statText">{{ round($userInvitationRate,PHP_ROUND_HALF_UP) }}%</p>
@@ -65,9 +65,9 @@
         <div class="w-full max-w-3xl">
             <div class="w-full mt-1">
                 <div class="rounded-lg shadow-sm">
-                    <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden">
-                        <h3 class="relative top-5 text-center font-bold text-orange-500">Confirmation Rate</h3>
-                        <h4 class="relative top-6 text-center font-bold text-gray-400">Confirmed users against all the invited ones </h4>
+                    <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:bg-indigo-400 group">
+                        <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Confirmation Rate</h3>
+                        <h4 class="relative top-6 text-center font-bold text-gray-400 group-hover:text-white">Confirmed users against all the invited ones </h4>
                         <div class="circleDiv">
                             <div class="circle-diagram" style="--percent: {{ round($invitationConfirmationRate,PHP_ROUND_HALF_UP) }}">
                                 <p class="statText">{{ round($invitationConfirmationRate,PHP_ROUND_HALF_UP) }}%</p>
@@ -81,9 +81,9 @@
         <div class="w-full max-w-3xl">
             <div class="w-full mt-1">
                 <div class="rounded-lg shadow-sm">
-                    <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden">
-                        <h3 class="relative top-5 text-center font-bold text-orange-500">Attandance Rate</h3>
-                        <h4 class="relative top-6 text-center font-bold text-gray-400">Users attanding the event against the invited users</h4>
+                    <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:bg-indigo-400 group">
+                        <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Attandance Rate</h3>
+                        <h4 class="relative top-6 text-center font-bold text-gray-400 group-hover:text-white">Users attanding the event against the invited users</h4>
                         <div class="circleDiv">
                             <div class="circle-diagram" style="--percent: {{ round($eventAttendanceRate,PHP_ROUND_HALF_UP) }}">
                                 <p class="statText">{{ round($eventAttendanceRate,PHP_ROUND_HALF_UP) }}%</p>

@@ -8,6 +8,7 @@ use App\Models\Invitation;
 use App\Http\Controllers\mailController;
 use App\Models\invitationConfirmation;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\Reader\Exception;
@@ -18,7 +19,6 @@ class campaigncontroller extends Controller
     public function create()
     {
         //! this piece of code searches for all the events that have an invitation and returns them to the 'Campaign Creation' view
-
         $invitations = Invitation::all();
         $eventsWithInvitation = array();
         foreach ($invitations as $invitation) {
@@ -26,7 +26,7 @@ class campaigncontroller extends Controller
         }
         $eventsWithInvitation = array_values(array_unique($eventsWithInvitation));
 
-        $events = Event::all()->whereIn('id', $eventsWithInvitation);
+        $events = Event::all()->whereIn('id', $eventsWithInvitation)->where('startingAt','>',Carbon:: now('GMT+1'));
 
         return view('Campaign.Create', compact('events'));
     }
@@ -81,8 +81,9 @@ class campaigncontroller extends Controller
 
         $file = $request->file('participants');
         $data = $this->importData($file);
+        $originalData = $data;
         $mailController = new mailController;
-        $mailController->send($request,$data,$status,$invitation,$event,$Campaign);
+        $mailController->send($request,$originalData,$data,$status,$invitation,$event,$Campaign);
         return redirect(route('dashboard'));
     }
 
@@ -132,7 +133,8 @@ class campaigncontroller extends Controller
             }
             
             //=> finally we fetch all the events that the $eventsWithInvitation array contain their Id
-            $events = Event::all()->whereIn('id', $eventsWithCampaigns);
+            
+            $events = Event::all()->whereIn('id', $eventsWithCampaigns)->where('startingAt','>',Carbon:: now('GMT+1'));
             $Camp = true;
             return view('ChooseEvent',compact('events','Camp'));
 
@@ -147,8 +149,23 @@ class campaigncontroller extends Controller
             $CampaignsCount = $Campaigns->count();
             $CampaignRelaunchesNumber = $Campaigns->where('status','Relanch')->count();
             $CampaignComplementsNumber = $Campaigns->where('status','Complement')->count();
+
+            $userIds = array();
+            foreach ($Campaigns as $Camp ) 
+            {
+                array_push($userIds, DB::select('select * from invitation_confirmations where eventId = ? and isConfirmed = 1 and isPresent = 0',[$eventId]));    
+            }
             
-            return view('Campaign.viewCampaign',compact('event','Campaigns','CampaignsCount','CampaignRelaunchesNumber','CampaignComplementsNumber'));
+            if (!array_filter($userIds)) 
+            {
+                $stop = true;
+            }
+            else
+            {
+                $stop = false;
+            }
+            
+            return view('Campaign.viewCampaign',compact('event','Campaigns','CampaignsCount','CampaignRelaunchesNumber','CampaignComplementsNumber', 'stop'));
   
         }
         

@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 
 class mailController extends Controller
 {
-    public function send(Request $request,$data,$status,$invitation,$event,$Campaign)
+    public function send(Request $request,$originalData,$data,$status,$invitation,$event,$Campaign)
     {
         $databaseParticiants = User::all()->where('roleId',3);
         $participantsEmails =  array();
@@ -26,7 +26,16 @@ class mailController extends Controller
         $recipients = array();
         foreach ($data as $excel) 
         {
-            array_push($recipients,$excel["email"]);
+            if($status == 'Complement')
+            {
+                foreach($originalData as $PreexcelData)
+                if ($excel == $PreexcelData) 
+                {
+                    continue;
+                }
+            }
+            else
+                array_push($recipients,$excel["email"]);
         }
         
          
@@ -72,7 +81,6 @@ class mailController extends Controller
 
             //* Send the data to the mailer function
             Mail::to($recipient)->send(new \App\Mail\InvitationMail($data[$userIndex],$recipient,$status,$invitation,$event,$Campaign,$inviteToken));
-            sleep(2);
         }
        
     }

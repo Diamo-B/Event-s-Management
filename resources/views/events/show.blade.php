@@ -52,7 +52,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (!isset($type) && (isset($realtimedata) || isset($Historydata)) && $events->currentPage() == 1)    
+                        @if (sizeof($events) >1 &&(!isset($type) && (isset($realtimedata) || isset($Historydata)) && $events->currentPage() == 1))    
                             <tr class="bg-pink-300 border-b text-white text-center  group">
                                 <td scope="row" colspan="4">
                                     The events with Campaigns start here
@@ -61,11 +61,13 @@
                         @endif
                         @foreach ($events as $event)
                             @if ($event == 'Events with Campaigns' && !isset($type))
-                            <tr class="bg-pink-300 border-b text-white text-center  group">
-                                <td scope="row" colspan="4">
-                                    The events with Campaigns end here
-                                </td>
-                            </tr>
+                                @if (sizeof($events)>1)
+                                    <tr class="bg-pink-300 border-b text-white text-center  group">
+                                        <td scope="row" colspan="4">
+                                            The events with Campaigns end here
+                                        </td>
+                                    </tr>
+                                @endif
                             @else
 
 
@@ -135,7 +137,11 @@
             
             @if ($events->hasPages())
             <div class="flex justify-end">
-                {{ $events->links() }}
+                @if (isset(($data)))
+                {{ $events->appends($data)->links() }}
+                @else
+                {{ $events->links() }}                                    
+                @endif
             </div>
             @endif
 
@@ -186,7 +192,7 @@
                 </div>
             </div>
             <br>
-            <div class="flex w-[50%] mb-5 justify-evenly">
+            <div class=" w-full mb-5">
                 <div class="hover:text-cyan-200">
                     <h3 class="text-3xl font-semibold">Location</h3>
                     <p>{{ $details->location }}</p>

@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
-
+use Illuminate\Support\Facades\DB;
 
 class eventController extends Controller
 {
@@ -18,22 +18,21 @@ class eventController extends Controller
         $page = isset($request->page) ? $request->page : 1; // Get the page=1 from the url
         /* $page = $page ?: (Paginator::resolveCurrentPage() ?: 1); */
         $items = $items instanceof Collection ? $items : Collection::make($items);
+        if (empty($options)) {
+            $options['path'] = $request->url();
+        }
 
         return new LengthAwarePaginator(
             $items->forPage($page, $perPage), $items->count(), $perPage, $page,
-            ['path' => $request->url()],
+            ['path' => $options['path']],
         );
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(Request $request)
     {
-        $events = Event::latest()->where('endingAt', '>', Carbon::now('GMT+1'))->get()->toArray();
-        $events = $this->paginate($request,$events);
+        $events = Event::latest()->where('endingAt', '>', Carbon::now('GMT+1'))->paginate(5);
         $search =  true;
+
         return view('events.Show', compact('events', 'search'));
     }
 
@@ -41,27 +40,18 @@ class eventController extends Controller
     {
 
         $titleOrLocation = $request->input('search');
-        $events = Event::latest()->where('endingAt', '>', Carbon::now('GMT+1'))->where('title', $titleOrLocation)->orWhere('location', $titleOrLocation)->get()->toArray();
-        $events = $this->paginate($request,$events,5);
-        return view('events.show', compact('events'));
+        $now = Carbon::now('GMT+1');
+        $events = Event::latest()->where('endingAt', '>', $now)->where('title', $titleOrLocation)->orWhere('location', $titleOrLocation)->paginate(2)->withQueryString();
+        $data = $request->all();
+        return view('events.Show', compact('events','data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('events.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $request->validate([
@@ -76,26 +66,40 @@ class eventController extends Controller
         ]);
         $sDate = explode('/', $request->input('Starting_date'));
         $eDate = explode('/', $request->input('Ending_date'));
-        if (strpos($request->input('Starting_time'), 'PM' !== false)) {
+        if (strpos($request->input('Starting_time'), 'PM') !== false) {
             $sTime = trim($request->input('Starting_time'), 'AMP ');
             $sTime = explode(':', $sTime);
             $sTime[0] = (int)$sTime[0];
-            $sTime[0] += 12;
+            if($sTime[0] == 12)
+            {
+                $sTime[0] = "00";
+            }
+            else 
+            {                
+                $sTime[0] += 12;
+            }
             $sTime[0] = (string)$sTime[0];
             $sTime = $sTime[0] . ':' . $sTime[1];
         } else {
             $sTime = trim($request->input('Starting_time'), 'AMP ');
         }
 
-        if (strpos($request->input('Ending_time'), 'PM' !== false)) {
+        if (strpos($request->input('Ending_time'), 'PM' ) !== false) {
             $eTime = trim($request->input('Ending_time'), 'AMP ');
             $eTime = explode(':', $eTime);
             $eTime[0] = (int)$eTime[0];
-            $eTime[0] += 12;
+            if($eTime[0] == 12)
+            {
+                $eTime[0] = "00";
+            }
+            else 
+            {                
+                $eTime[0] += 12;
+            }            
             $eTime[0] = (string)$eTime[0];
             $eTime = $eTime[0] . ':' . $eTime[1];
         } else {
-            $eTime = trim($request->input('Starting_time'), 'AMP ');
+            $eTime = trim($request->input('Ending_time'), 'AMP ');
         }
 
 
@@ -117,12 +121,7 @@ class eventController extends Controller
         return redirect(route('dashboard'));
     }
 
-    /**
-     * Display the details of the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         $details = Event::find($id);
@@ -145,44 +144,7 @@ class eventController extends Controller
         return view('events.Show', compact('details','Date_Time'));
     }
 
-    /** 
-     * finds the specified resource.
-     *
-     * @param  Request $request
-     * @return \Illuminate\Http\Response
-     */
 
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $event = Event::find($id);

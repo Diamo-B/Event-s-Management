@@ -174,6 +174,8 @@ class StatsController extends Controller
         $endedEvents = \App\Models\Event::all()->where('endingAt', '<=', Carbon::now('GMT+1'))->count(); 
         //! participants count
         $participants = User::all()->where('roleId',3)->count();
+        //! users count
+        $users = User::all()->count();
         //! invitations count
         $invites = count(DB::select('select * from event_user')); //- [II]
 
@@ -198,7 +200,7 @@ class StatsController extends Controller
         }
         else
         {
-            return view('Stats.fullStats',compact('events','ongoingEvents','notStartedYetEvents','endedEvents','participants','invites'));
+            return view('Stats.fullStats',compact('events','ongoingEvents','notStartedYetEvents','endedEvents','participants','users','invites'));
         }
     }
 }

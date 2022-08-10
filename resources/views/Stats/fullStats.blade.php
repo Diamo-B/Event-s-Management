@@ -11,9 +11,9 @@
             <div class="w-full max-w-3xl">
                 <div class="w-full mt-1">
                     <div class="rounded-lg shadow-sm">
-                        <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden">
-                            <h3 class="relative top-5 text-center font-bold text-orange-500">Total Invitation Acceptance Rate</h3>
-                            <h4 class="relative top-6 text-center font-bold text-gray-400">Accepted invitations in all events in regard of all the issued invitations</h4>
+                        <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden text-center hover:bg-indigo-400 group">
+                            <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Total Invitation Acceptance Rate</h3>
+                            <h4 class="relative top-6 text-center font-bold text-gray-400 group-hover:text-white">Accepted invitations in all events in regard of all the issued invitations</h4>
                             <div class="circleDiv">
                                 <div class="circle-diagram" style="--percent: {{ round($acceptanceRate,PHP_ROUND_HALF_UP) }}">
                                     <p class="statText">{{ round($acceptanceRate,PHP_ROUND_HALF_UP) }}%</p>
@@ -27,9 +27,9 @@
             <div class="w-full max-w-3xl">
                 <div class="w-full mt-1">
                     <div class="rounded-lg shadow-sm">
-                        <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden">
-                            <h3 class="relative top-5 text-center font-bold text-orange-500">Total Attandance Rate</h3>
-                            <h4 class="relative top-6 text-center font-bold text-gray-400">Attandances in all events in regard of all the issued invitations</h4>
+                        <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:bg-indigo-400 group">
+                            <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Total Attandance Rate</h3>
+                            <h4 class="relative top-6 text-center font-bold text-gray-400 group-hover:text-white">Attandances in all events in regard of all the issued invitations</h4>
                             <div class="circleDiv">
                                 <div class="circle-diagram" style="--percent: {{ round($attandanceRate,PHP_ROUND_HALF_UP) }}">
                                     <p class="statText">{{ round($attandanceRate,PHP_ROUND_HALF_UP) }}%</p>
@@ -43,9 +43,9 @@
             <div class="w-full max-w-3xl">
                 <div class="w-full mt-1">
                     <div class="rounded-lg shadow-sm">
-                        <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden">
-                            <h3 class="relative top-5 text-center font-bold text-orange-500">Total Absence Rate</h3>
-                            <h4 class="relative top-6 text-center font-bold text-gray-400">Users being absent in all events in regard of all the issued invitations</h4>
+                        <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:bg-indigo-400 group">
+                            <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Total Absence Rate</h3>
+                            <h4 class="relative top-6 text-center font-bold text-gray-400 group-hover:text-white">Users being absent in all events in regard of all the issued invitations</h4>
                             <div class="circleDiv">
                                 <div class="circle-diagram" style="--percent: {{ round($absenceRate,PHP_ROUND_HALF_UP) }}">
                                     <p class="statText">{{ round($absenceRate,PHP_ROUND_HALF_UP) }}%</p>
@@ -60,10 +60,11 @@
         <main class="grid grid-cols-3 gap-4 mb-10 mt-5 mx-5 ">
             <div class="w-full max-w-3xl">
                 <div class="w-full mt-1">
-                    <div class="rounded-lg  shadow-xl ">
+                    <div class="rounded-lg  shadow-xl">
                         <div class="rounded-lg bg-gray-100 shadow-lg md:shadow-xl relative overflow-hidden text-center hover:bg-indigo-400 group">
-                            <h3 class="relative top-5 mt-5 text-center font-bold text-orange-500 group-hover:text-white">Events</h3>
-                            <p class="text-5xl mt-9 mb-11 font-bold text-teal-500 group-hover:text-pink-300">{{ $events }} </p> 
+                            <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Events</h3>
+                            <p class="text-5xl mt-8 font-bold text-teal-500 group-hover:text-pink-300">{{ $events }}</p> 
+                            <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">including not started, ongoing and ended events</p>
                         </div>
                     </div>
                 </div>
@@ -102,13 +103,14 @@
                     </div>
                 </div>
             </div>
+            
             <div class="w-full max-w-3xl">
                 <div class="w-full mt-1">
                     <div class="rounded-lg  shadow-xl">
                         <div class="rounded-lg bg-gray-100 shadow-lg md:shadow-xl relative overflow-hidden text-center hover:bg-indigo-400 group">
-                            <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Total Participants</h3>
+                            <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Total Participant accounts</h3>
                             <p class="text-5xl mt-8 font-bold text-teal-500 group-hover:text-pink-300">{{ $participants }} </p> 
-                            <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">from 20 users with participant role</p>
+                            <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">from all the {{ $users }} users</p>
                         </div>
                     </div>
                 </div>

@@ -49,11 +49,7 @@
                 </div>
                 
                 <label for="location" class="text-center text-2xl font-bold text-white">Location</label><br>
-                <select type="text" name="location" id="Location" class="w-full mb-5 text-sm text-gray-700 form-control  rounded-lg  text-center py-1.5 font-normal bg-white bg-clip-padding border border-solid border-gray-600 transition  focus:ring-0  focus:bg-white focus:border-gray-900 focus:outline-none">
-                    <option value="amdl">Amdl Rabat</option>
-                    <option value="tokyo">tokyo</option>
-                    <option value="berlin">berlin</option>
-                </select>
+                <input type="text" name="location" id="Location" class="w-full mb-5 text-sm text-gray-700 form-control  rounded-lg  text-center py-1.5 font-normal bg-white bg-clip-padding border border-solid border-gray-600 transition  focus:ring-0  focus:bg-white focus:border-gray-900 focus:outline-none">
                 <br>
                 <label for="room" class="text-center text-2xl font-bold text-white">Room</label><br>
                 <input type="text" name="room" id="room" class="w-full mb-10 text-sm text-gray-700 form-control  rounded-lg  text-center py-1.5 font-normal bg-white bg-clip-padding border border-solid border-gray-600 transition  focus:ring-0  focus:bg-white focus:border-gray-900 focus:outline-none">
