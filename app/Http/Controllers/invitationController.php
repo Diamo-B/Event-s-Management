@@ -136,7 +136,7 @@ class invitationController extends Controller
             }
             
             //=> finally we fetch all the events that the $eventsWithInvitation array contain their Id
-            $events = Event::all()->whereIn('id', $eventsWithInvitation);
+            $events = Event::all()->whereIn('id', $eventsWithInvitation)->where('startingAt','>',Carbon::now('GMT+1'));
             $Inv = true;
             return view('ChooseEvent', compact('events','Inv'));
 
