@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use Carbon\Carbon;
-use Illuminate\Pagination\Paginator;
+use DateTime;
+use DateTimeZone;
+use Exception;
+use Session;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\DB;
+
 
 class eventController extends Controller
 {
@@ -64,49 +67,71 @@ class eventController extends Controller
             'location' => 'required',
             'room' => 'required',
         ]);
-        $sDate = explode('/', $request->input('Starting_date'));
-        $eDate = explode('/', $request->input('Ending_date'));
-        if (strpos($request->input('Starting_time'), 'PM') !== false) {
-            $sTime = trim($request->input('Starting_time'), 'AMP ');
-            $sTime = explode(':', $sTime);
-            $sTime[0] = (int)$sTime[0];
-            if($sTime[0] == 12)
+        try
+        {
+            $sDate = explode('/', $request->input('Starting_date'));
+            $eDate = explode('/', $request->input('Ending_date'));
+            if (strpos($request->input('Starting_time'), 'PM') !== false) {
+                $sTime = trim($request->input('Starting_time'), 'AMP ');
+                $sTime = explode(':', $sTime);
+                $sTime[0] = (int)$sTime[0];
+                if($sTime[0] == 12)
+                {
+                    $sTime[0] = "00";
+                }
+                else 
+                {                
+                    $sTime[0] += 12;
+                }
+                $sTime[0] = (string)$sTime[0];
+                $sTime = $sTime[0] . ':' . $sTime[1];
+            } else {
+                $sTime = trim($request->input('Starting_time'), 'AMP ');
+            }
+
+            if (strpos($request->input('Ending_time'), 'PM' ) !== false) {
+                $eTime = trim($request->input('Ending_time'), 'AMP ');
+                $eTime = explode(':', $eTime);
+                $eTime[0] = (int)$eTime[0];
+                if($eTime[0] == 12)
+                {
+                    $eTime[0] = "00";
+                }
+                else 
+                {                
+                    $eTime[0] += 12;
+                }            
+                $eTime[0] = (string)$eTime[0];
+                $eTime = $eTime[0] . ':' . $eTime[1];
+            } else {
+                $eTime = trim($request->input('Ending_time'), 'AMP ');
+            }
+            
+            $startDateTime = $sDate[2] . '-' . $sDate[1] . '-' . $sDate[0]  . ' ' . $sTime . ':00';
+            
+            $endDateTime = $eDate[2] . '-' . $eDate[1] . '-' . $eDate[0]  . ' ' . $eTime . ':00';
+
+            $format = 'Y-m-d H:i:s';
+            $timezone = new DateTimeZone( 'GMT+1' );
+            $object_sDateTime = DateTime::createFromFormat($format,$startDateTime,$timezone);
+            $object_eDateTime = DateTime::createFromFormat($format,$endDateTime,$timezone);
+            if ($object_sDateTime > $object_eDateTime ) 
             {
-                $sTime[0] = "00";
+                $message = 'Error: An event can\'t have a starting time that comes after the ending time';    
+                throw new Exception($message);
             }
-            else 
-            {                
-                $sTime[0] += 12;
-            }
-            $sTime[0] = (string)$sTime[0];
-            $sTime = $sTime[0] . ':' . $sTime[1];
-        } else {
-            $sTime = trim($request->input('Starting_time'), 'AMP ');
+        } 
+        catch (Exception $e) 
+        {
+            //dd($e->getMessage());
+            //$request->session::flash('error', "Special message goes here");
+            return back()->withErrors(["error"=>$e->getMessage()]);
         }
-
-        if (strpos($request->input('Ending_time'), 'PM' ) !== false) {
-            $eTime = trim($request->input('Ending_time'), 'AMP ');
-            $eTime = explode(':', $eTime);
-            $eTime[0] = (int)$eTime[0];
-            if($eTime[0] == 12)
+            /* else
             {
-                $eTime[0] = "00";
-            }
-            else 
-            {                
-                $eTime[0] += 12;
-            }            
-            $eTime[0] = (string)$eTime[0];
-            $eTime = $eTime[0] . ':' . $eTime[1];
-        } else {
-            $eTime = trim($request->input('Ending_time'), 'AMP ');
-        }
-
-
-        $startDateTime = $sDate[2] . '-' . $sDate[1] . '-' . $sDate[0]  . ' ' . $sTime . ':00';
-
-        $endDateTime = $eDate[2] . '-' . $eDate[1] . '-' . $eDate[0]  . ' ' . $eTime . ':00';
-
+                dd($sTime,$object_sDateTime,$eTime,$object_eDateTime,$object_sDateTime>$object_eDateTime);
+            } */
+        
         $thisEvent = new Event([
             'title' => $request->input('Title'),
             'object' => $request->input('Object'),

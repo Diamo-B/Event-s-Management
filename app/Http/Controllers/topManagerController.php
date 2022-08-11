@@ -102,8 +102,8 @@ class topManagerController extends Controller
             $CampaignComplementsNumber = $Campaigns->where('status', 'Complement')->count();
 
             $viewData = true;
-            
-            return view('Campaign.viewCampaign', compact('viewData','event', 'Campaigns', 'CampaignsCount', 'CampaignRelaunchesNumber', 'CampaignComplementsNumber'));
+            $stop = false; //? view the campaignController@index (the else part)
+            return view('Campaign.viewCampaign', compact('stop','viewData','event', 'Campaigns', 'CampaignsCount', 'CampaignRelaunchesNumber', 'CampaignComplementsNumber'));
         } 
         
         else //! Choose an Event Page (Page I)

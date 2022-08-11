@@ -9,7 +9,17 @@
 
 @section('content')
     @include('navbar')
-    <main class="flex text-center rounded-full justify-center align-middle mt-14  mb-28">
+    @if($errors->any())
+    <div class="grid justify-center bg-indigo-400 text-center py-3 w-fit mt-5 rounded-full">
+        <div class="p-2 bg-indigo-300 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+          <span class="flex rounded-full bg-red-400 uppercase px-2 py-1 text-xs font-bold mr-3">Alert</span>
+          <span class="font-semibold mr-2 text-left flex-auto">{{ $errors->first() }}</span>
+        </div>
+    </div>
+    <main class="flex text-center rounded-full justify-center align-middle mt-2 mb-28">
+    @else
+    <main class="flex text-center rounded-full justify-center align-middle mt-14 mb-28">
+    @endif    
         <div class="bg-indigo-400 p-10 border-4 border-indigo-500 rounded-lg">
             <form action="{{ route('event.store') }}" method="post">
                 @csrf

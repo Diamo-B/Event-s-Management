@@ -135,7 +135,7 @@ class invitationController extends Controller
                 array_push($eventsWithInvitation, $invitation->eventId);
             }
             
-            //=> finally we fetch all the events that the $eventsWithInvitation array contain their Id
+            //=> finally we fetch all the events that the $eventsWithInvitation array contain their Id that have not started yet
             $events = Event::all()->whereIn('id', $eventsWithInvitation)->where('startingAt','>',Carbon::now('GMT+1'));
             $Inv = true;
             return view('ChooseEvent', compact('events','Inv'));

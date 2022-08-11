@@ -64,7 +64,7 @@
                         <div class="rounded-lg bg-gray-100 shadow-lg md:shadow-xl relative overflow-hidden text-center hover:bg-indigo-400 group">
                             <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Events</h3>
                             <p class="text-5xl mt-8 font-bold text-teal-500 group-hover:text-pink-300">{{ $events }}</p> 
-                            <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">including not started, ongoing and ended events</p>
+                            <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">Including not started, ongoing and ended events</p>
                         </div>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                         <div class="rounded-lg bg-gray-100 shadow-lg md:shadow-xl relative overflow-hidden text-center hover:bg-indigo-400 group">
                             <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Ongoing</h3>
                             <p class="text-5xl mt-8 font-bold text-teal-500 group-hover:text-pink-300">{{ $ongoingEvents }}</p> 
-                            <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">from {{ $events }} events overall</p>
+                            <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">From {{ $events }} events overall</p>
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                         <div class="rounded-lg bg-gray-100 shadow-lg md:shadow-xl relative overflow-hidden text-center hover:bg-indigo-400 group">
                             <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Has Not Started Yet</h3>
                             <p class="text-5xl mt-8 font-bold text-teal-500 group-hover:text-pink-300">{{ $notStartedYetEvents }}</p> 
-                            <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">from {{ $events }} events overall</p>
+                            <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">From {{ $events }} events overall</p>
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                         <div class="rounded-lg bg-gray-100 shadow-lg md:shadow-xl relative overflow-hidden text-center hover:bg-indigo-400 group">
                             <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Ended</h3>
                             <p class="text-5xl mt-8 font-bold text-teal-500 group-hover:text-pink-300">{{ $endedEvents }}</p> 
-                            <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">from {{ $events }} events overall</p>
+                            <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">From {{ $events }} events overall</p>
                         </div>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
                         <div class="rounded-lg bg-gray-100 shadow-lg md:shadow-xl relative overflow-hidden text-center hover:bg-indigo-400 group">
                             <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Total Participant accounts</h3>
                             <p class="text-5xl mt-8 font-bold text-teal-500 group-hover:text-pink-300">{{ $participants }} </p> 
-                            <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">from all the {{ $users }} users</p>
+                            <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">From all the {{ $users }} users</p>
                         </div>
                     </div>
                 </div>
@@ -121,7 +121,7 @@
                         <div class="rounded-lg bg-gray-100 shadow-lg md:shadow-xl relative overflow-hidden text-center hover:bg-indigo-400 group">
                             <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Total invitations to Participants</h3>
                             <p class="text-5xl mt-8 font-bold text-teal-500 group-hover:text-pink-300">{{ $invites }}</p> 
-                            <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">Sent to {{ $participants }} participants</p>
+                            <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">Made for {{ $invites }} events</p>
                         </div>
                     </div>
                 </div>
