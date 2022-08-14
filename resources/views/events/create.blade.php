@@ -10,17 +10,19 @@
 @section('content')
     @include('navbar')
     @if($errors->any())
-    <div class="grid justify-center bg-indigo-400 text-center py-3 w-fit mt-5 rounded-full">
-        <div class="p-2 bg-indigo-300 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
-          <span class="flex rounded-full bg-red-400 uppercase px-2 py-1 text-xs font-bold mr-3">Alert</span>
-          <span class="font-semibold mr-2 text-left flex-auto">{{ $errors->first() }}</span>
+    <div class="grid grid-cols-1 w-full mt-3 justify-items-center" id="alert">
+        <div class="flex p-4 text-sm w-fit text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+            <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+            <span class="sr-only">Info</span>
+            <div>
+            <span class="font-medium">Alert!</span> {{ $errors->first() }}
+            </div>
         </div>
     </div>
-    <main class="flex text-center rounded-full justify-center align-middle mt-2 mb-28">
-    @else
-    <main class="flex text-center rounded-full justify-center align-middle mt-14 mb-28">
-    @endif    
+    @endif 
+    <main class="grid text-center rounded-full justify-center align-middle mt-14 mb-28">
         <div class="bg-indigo-400 p-10 border-4 border-indigo-500 rounded-lg">
+            <h1 class="text-center text-3xl font-bold text-white pb-5 mb-5 border-b-2">Create Event</h1>
             <form action="{{ route('event.store') }}" method="post">
                 @csrf
                 <label for="Title" class="text-center text-2xl font-black text-white">Event's Title</label><br>

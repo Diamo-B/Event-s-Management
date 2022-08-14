@@ -18,7 +18,7 @@ use function PHPUnit\Framework\isNull;
 
 class StatsController extends Controller
 {
-    public function paginate(Request $request, $items, $perPage = 10, $page = null, $options=[])
+    public function paginate(Request $request, $items, $perPage = 2, $page = null, $options=[])
     {
         $page = isset($request->page) ? $request->page : 1; // Get the page=1 from the url
         /* $page = $page ?: (Paginator::resolveCurrentPage() ?: 1); */
@@ -48,7 +48,10 @@ class StatsController extends Controller
                 }
             }
             $events = $this->paginate($request,$events);
-            return view('events.show', compact('events', 'type'));
+            dd($events);
+            $data = $request->all();
+            $search = true;
+            return view('events.show', compact('events', 'type', 'data','search'));
         }
     }
 
@@ -69,7 +72,9 @@ class StatsController extends Controller
                 }
             }
             $events = $this->paginate($request,$events);
-            return view('events.show', compact('events', 'type'));
+            $data = $request->all();
+            $search = true;
+            return view('events.show', compact('events', 'type','data','search'));
         }
     }
 
@@ -157,8 +162,7 @@ class StatsController extends Controller
         */
 
 
-        /* dd("the participant ids:",$participantIds,"the event:",$event,"the invited users ids:",$invitedUsersIds,"invited users count:",$invitedUsersCount,'ids of the users who accepted the invitation:',$acceptedUsersIds,'the count of the users who accepted the invitation:',$acceptedUsersCount,'the users who attended the event:', $attendedUsersIds, 'the count of the users who attended the event:',$attendedUsersCount, 'the invitation rate: the invited users compared to the totality of the participants',round($userInvitationRate,PHP_ROUND_HALF_UP).'%','Rate of the users who accepted their invitations compared to the total of invited users:', round($invitationConfirmationRate,PHP_ROUND_HALF_UP).'%','Rate of the invited users who actually attended the event:',round($eventAttendanceRate,PHP_ROUND_HALF_UP).'%','Rate of the users who attended the event compared to the totality of participants:',round($eventAttendance_Total,PHP_ROUND_HALF_UP).'%'); */
-
+        
         return view('Stats.actualStats', compact('participantIds', 'invitedUsersCount', 'acceptedUsersCount', 'attendedUsersCount', 'userInvitationRate', 'invitationConfirmationRate', 'eventAttendanceRate', 'eventAttendance_Total'));
     }
 

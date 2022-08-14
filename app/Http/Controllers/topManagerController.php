@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Campaign;
+use App\Models\Event;
 use App\Models\invitationConfirmation;
 use App\Models\User;
 use Carbon\Carbon;
@@ -59,7 +60,6 @@ class topManagerController extends Controller
                 array_push($nonConfirmedData,$user);
             }
            $viewusers = $data;
-           //dd('users:',$viewusers,'event',$eventId,'non Confirmed Data:',$nonConfirmedData);
             return view('Campaign.viewCampaign', compact('viewusers','eventId','nonConfirmedData'));
         } 
 
@@ -109,23 +109,17 @@ class topManagerController extends Controller
         else //! Choose an Event Page (Page I)
         {
             $dt = Carbon::now('GMT+1')->format("Y-m-d H:i:s");
-            $eventswithCamps= DB::select('SELECT E.* FROM events as E INNER JOIN campaigns as C on E.id = C.eventId order By E.id DESC');  //^ IDs of the events that actually have one or more campaigns 
-            $allevents = DB::select('SELECT * from events order By id DESC'); //^ all the events
-            $separator = ['Events with Campaigns'];
-            $events =array_unique(array_merge($eventswithCamps, $separator, $allevents),SORT_REGULAR);
 
-            
-            
+            // *Get all events
+            $events = Event::all();
+
             $onGoingEvents = array();
             $endedEvents = array();
             foreach ($events as $event) 
             {
-                if ($event == 'Events with Campaigns') {
-                    array_push($onGoingEvents,$event);
-                    array_push($endedEvents,$event);
-                    continue;
-                }
-                $ending = $event->endingAt;
+                $event = $event->getAttributes();
+                
+                $ending = $event["endingAt"];
                 
                 if ($ending>$dt) 
                 {
@@ -139,25 +133,41 @@ class topManagerController extends Controller
             $route = Route::current()->getName();
             $realtimedata = null;
             $Historydata = null;
+            $ids=array();
             if ($route == 'realTimeData') 
             {
+                if ($request->session()->has('ManagerHistory')) {
+                    $request->session()->forget('ManagerHistory');
+                }
+                foreach ($onGoingEvents as $ev) 
+                {
+                    array_push($ids,$ev['id']);
+                }
+                $request->session()->put('ManagerRealTime',$ids);
                 $events = $this->paginate($request,$onGoingEvents);
                 $realtimedata = true;
             }
             else if($route == 'history')
             {
+                if ($request->session()->has('ManagerRealTime')) {
+                    $request->session()->forget('ManagerRealTime');
+                }
+                foreach ($endedEvents as $ev) 
+                {
+                    array_push($ids,$ev['id']);
+                }
+                $request->session()->put('ManagerHistory',$ids);
+
                 $events = $this->paginate($request,$endedEvents);
                 $Historydata = true;
             }
-
-            
-            
-             //dd($events[0]->title);
-            return view('events.show', compact('events','realtimedata','Historydata'));
+            $search=true;
+            $data = $request->all();
+            return view('events.show', compact('search','data','events','realtimedata','Historydata'));
         }
     }
 
-    public function paginate(Request $request, $items, $perPage = 10, $page = null, $options=[])
+    public function paginate(Request $request, $items, $perPage = 5, $page = null, $options=[])
     {
         $page = isset($request->page) ? $request->page : 1; // Get the page=1 from the url
         /* $page = $page ?: (Paginator::resolveCurrentPage() ?: 1); */
@@ -169,3 +179,4 @@ class topManagerController extends Controller
         );
     }
 }
+

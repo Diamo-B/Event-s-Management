@@ -2,6 +2,17 @@
 
 @section('content')
     @include('navbar')
+    @if($errors->any())
+        <div class="grid grid-cols-1 w-full mt-3 justify-items-center" id="alert">
+            <div class="flex p-4 text-sm w-fit text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+                <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                <span class="sr-only">Info</span>
+                <div>
+                <span class="font-medium">Error!</span> {{ $errors->first() }}
+                </div>
+            </div>
+        </div>
+    @endif
     <main class="flex text-center rounded-full justify-center align-middle mt-8 mb-28">
         <div class="bg-indigo-400 p-10 border-4 border-indigo-500 rounded-lg">
             <h1 class="text-center text-3xl font-bold text-white pb-5 mb-5 border-b-2">Create Campaign</h1>

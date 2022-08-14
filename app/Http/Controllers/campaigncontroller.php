@@ -11,6 +11,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use PhpOffice\PhpSpreadsheet\Reader\Exception;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -50,7 +51,7 @@ class campaigncontroller extends Controller
         if ($status == 'Original') 
         {
             if ($count > 0)
-                dd('error the invitation with the id ' . $invitation->id . ' already has an original Campaign');
+                return back()->withErrors(['The invitation of the event ' . $event->title . ' already has an original Campaign']);
             else
                 goto makeCampaign;
         }
@@ -58,8 +59,7 @@ class campaigncontroller extends Controller
         {
             if ($count == 0) 
             {
-                dd('error the invitation with the id ' . $invitation->id  . ' needs to have an original Campaign before relaunches or complements');
-                return;
+                return back()->withErrors(['The invitation of the event ' . $event->title . ' needs to have an original Campaign before relaunches or complements']);
             }
             if ($status == 'Relanch') 
             {
@@ -84,6 +84,8 @@ class campaigncontroller extends Controller
         $originalData = $data;
         $mailController = new mailController;
         $mailController->send($request,$originalData,$data,$status,$invitation,$event,$Campaign);
+
+        Session::flash('successMsg','Campaign created and emails were sent successfully.'); 
         return redirect(route('dashboard'));
     }
 

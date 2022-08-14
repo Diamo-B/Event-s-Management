@@ -4,6 +4,71 @@
     <link rel="stylesheet" href="{{ URL::asset('css/navbar.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/circleDiagrams.css') }}">
 @endsection
+@section('navbarAdd')
+    @isset($search)
+    <div class="relative  w-[40%] self-center right-12 ">
+        <div class="relative">
+            <form action="{{ route('event.search') }}" method="post" class="m-0">
+                @method('POST')
+                @csrf
+                <!-- search -->
+                <input type="search" id="default-search" name="search"
+                    class="w-[68%] text-sm text-white bg-indigo-400 rounded-lg border-2 border-white focus:border-white focus:outline-none  focus:font-bold   placeholder:text-white placeholder:font-bold"
+                    placeholder="Search Any Event By Name Or Location">
+                <button type="submit" class="text-black absolute right-20 bottom-1 bg-white border-2 border-white hover:bg-indigo-400 hover:text-white  font-medium rounded-lg text-sm px-4 py-1">
+                    Search
+                </button>
+            </form>
+            <form action="{{ route('event.filter') }}" method="post" class="m-0">
+                @method('POST')
+                @csrf
+                <!-- filter button -->
+                <button type="button" class="text-black absolute left-[85%] bottom-1 bg-white border-2 border-white hover:bg-indigo-400 hover:text-white  font-medium rounded-lg text-sm px-4 py-1" onclick="showFilter()">
+                    <i class="fa-solid fa-filter"></i><i class="fa-solid fa-caret-down"></i>
+                </button>
+
+                <!-- filter panel -->
+                <div id='filter_panel' class="absolute hidden text-sm w-[63%] z-50 text-gray-600 font-semibold " style='margin-left: 350px;'>
+                    <div class=" grid grid-cols-5 mt-3 py-5 bg-indigo-300 rounded-2xl ">
+                        <div class="border-b-2 col-span-5  border-solid border-white w-full flex justify-between space-x-4 px-5 h-fit py-2 ">
+                            <p class="inline-block col-span-4 ">Latest events</p>
+                            <input name="SearchCrit" type="checkbox" value="latest" class="inline-block col-span-1 text-indigo-500 bg-gray-100 rounded border-gray-300" onclick="checkboxChange(this)"></input>
+                        </div>
+                        <div class="border-y-2 col-span-5  border-solid border-white w-full flex space-x-4 justify-between px-5 h-fit py-2">
+                            <p class="inline-block col-span-4 ">Events With Campaigns</p>
+                            <input name="SearchCrit" type="checkbox" value="Camp" class="inline-block col-span-1 text-indigo-500 bg-gray-100 rounded border-gray-300" onclick="checkboxChange(this)"></input>
+                        </div>
+                        <div class="border-t-2 border-b-4 col-span-5  border-solid border-white w-full flex space-x-4 justify-between px-5 h-fit py-2">
+                            <p class="inline-block col-span-4 ">Events Without Campaigns</p>
+                            <input name="SearchCrit" type="checkbox" value="NoCamp" class="inline-block col-span-1 text-indigo-500 bg-gray-100 rounded border-gray-300" onclick="checkboxChange(this)"></input>
+                        </div>
+                        <div class="mt-2 col-span-5  border-solid border-white w-full flex justify-center px-5 h-fit py-2">
+                            <button name="submit" value="filter" type="submit" class="col-span-5 w-fit text-center  border-4 border-white rounded-3xl px-10 py-1 hover:bg-indigo-200 group ">
+                                <span class="text-center text-gray-800 text-md font-bold  group-hover:text-white">Filter</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- alphabetical order A to Z -->
+                <button name="submit" value="orderDesc" id="orderAsc" type="submit" onclick='alphaOrder(this)' class="text-black absolute left-[98%] bottom-1 bg-white border-2 border-white  hover:bg-indigo-400 hover:text-white font-medium rounded-lg text-sm px-4 py-1">
+                    <i class="fa-solid fa-arrow-down-a-z"></i>
+                </button>
+
+                <!-- alphabetical order Z to A -->
+                <button name="submit" value="orderAsc" id="orderDesc" type="submit" onclick='alphaOrder(this)' class="text-black absolute left-[109%] bottom-1 bg-white border-2 border-white hover:bg-indigo-400 hover:text-white font-medium rounded-lg text-sm px-4 py-1">
+                    <i class="fa-solid fa-arrow-up-a-z"></i>
+                </button>
+
+                <input type="hidden" name="events" value="{{ json_encode($events) }}">
+            </form>
+        </div>
+                
+    </div>
+    
+    @endisset
+@endsection
+
 
 @section('content')
     @include('navbar')

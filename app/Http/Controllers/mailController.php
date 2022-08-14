@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Role;
 use App\Models\User;
+use Exception;
+use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Illuminate\Support\Str;
 
 class mailController extends Controller
@@ -48,6 +52,7 @@ class mailController extends Controller
         
         $role = Role::where('label','Participant')->get()[0];
         $userIndex=0;
+
         foreach ($recipients as $recipient ) 
         {
             $userIndex = array_search($recipient,array_column($data, 'email'));
@@ -79,10 +84,12 @@ class mailController extends Controller
             //* make the relationship between the campaign and the recipients
             $user->campaigns()->attach($Campaign);
 
+            
             //* Send the data to the mailer function
-            Mail::to($recipient)->send(new \App\Mail\InvitationMail($data[$userIndex],$recipient,$status,$invitation,$event,$Campaign,$inviteToken));
+            $az = Mail::to($recipient)->send(new \App\Mail\InvitationMail($data[$userIndex],$recipient,$status,$invitation,$event,$Campaign,$inviteToken));
+
         }
-       
+
     }
 
     public function makeUser($request,$userIndex,$data,$role)

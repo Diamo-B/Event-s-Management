@@ -15,11 +15,12 @@ Route::get('/dashboard',[dashboardController::class,'index'])->middleware(['auth
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //*events
-//Route::resource('event',eventController::class)->middleware(['auth']);
+
 Route::get('event',[eventController::class, 'index'])->middleware(['auth'])->name('event.index');
+Route::any('event/filter',[eventController::class, 'filter'])->middleware(['auth'])->name('event.filter');
+Route::any('event/search',[eventController::class,'search'])->middleware(['auth'])->name('event.search');
 Route::post('event',[eventController::class, 'store'])->middleware(['auth'])->name('event.store');
 Route::get('event/create',[eventController::class, 'create'])->middleware(['auth'])->name('event.create');
-Route::any('event/search',[eventController::class,'search'])->middleware(['auth'])->name('event.search');
 Route::get('event/{event}',[eventController::class,'show'])->middleware(['auth'])->name('event.show');
 Route::delete('event/{event}',[eventController::class,'destroy'])->middleware(['auth'])->name('event.destroy');
 

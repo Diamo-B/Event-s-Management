@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
 use DateTime;
 
 
@@ -72,7 +73,7 @@ class invitationController extends Controller
         $fileExt = $file->getClientOriginalExtension();
 
 
-        $invitation = new Invitation(
+        /* $invitation = new Invitation(
             [
                 'eventId' => $eventID,
                 'object' => $body,
@@ -82,8 +83,9 @@ class invitationController extends Controller
             ]
         );
         $invitation->save();
-        $invitation->event()->associate($event)->save();
-        return redirect(route('campaign.create', compact('event')));
+        $invitation->event()->associate($event)->save(); */
+        Session::flash('successMsg','Invitation Created successfully'); 
+        return redirect(route('dashboard'));
     }
 
 
