@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use App\Models\Role;
 use App\Models\User;
-use Exception;
-use Illuminate\Mail\Mailable;
+use Illuminate\Support\Str;
+use App\Mail\forgotPassMail;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 
 class mailController extends Controller
 {
@@ -105,5 +102,13 @@ class mailController extends Controller
         
         $newUser->role()->associate($role)->save();
         return;
+    }
+
+    public function sendForgetPass($email)
+    {
+        $resetToken = Str::random(60);
+        User::where('email','=', $email)->update(array('forgetPassword_Token' => $resetToken));
+        Mail::to($email)->send(new forgotPassMail($resetToken,$email));
+
     }
 }

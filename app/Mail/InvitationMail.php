@@ -5,7 +5,6 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Storage;
 
 class InvitationMail extends Mailable
 {
@@ -17,7 +16,7 @@ class InvitationMail extends Mailable
     public $campaignData;
     public $dataRecipient;
     public $inviteToken;
-   
+
     
     public function __construct($data,$recipient,$status,$invitation,$event,$Campaign,$inviteToken)
     {

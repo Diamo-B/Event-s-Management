@@ -73,7 +73,7 @@ class invitationController extends Controller
         $fileExt = $file->getClientOriginalExtension();
 
 
-        /* $invitation = new Invitation(
+        $invitation = new Invitation(
             [
                 'eventId' => $eventID,
                 'object' => $body,
@@ -83,7 +83,7 @@ class invitationController extends Controller
             ]
         );
         $invitation->save();
-        $invitation->event()->associate($event)->save(); */
+        $invitation->event()->associate($event)->save();
         Session::flash('successMsg','Invitation Created successfully'); 
         return redirect(route('dashboard'));
     }

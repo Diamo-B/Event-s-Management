@@ -102,7 +102,6 @@ class eventController extends Controller
                 case 'latest':
 
                     array_push($events,Event::orderBy('startingAt','DESC')->whereIn('id',$data)->get()); 
-                    /* $events= $this->paginate($request,$events,5); */
                     $dataToPass = array();
                     foreach($events[0] as $event)
                     {
@@ -146,7 +145,7 @@ class eventController extends Controller
                     $idsWithoutCamps = array_diff($data,$ALLevWcamps);
                     if(empty($idsWithoutCamps))
                     {
-                        dd('error!! no event matches with the filter ');
+                        dd('error!! no event matches with the filter.');
                     }
                     else
                     {
