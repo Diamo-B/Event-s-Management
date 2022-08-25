@@ -48,7 +48,6 @@ class StatsController extends Controller
                 }
             }
             $events = $this->paginate($request,$events);
-            dd($events);
             $data = $request->all();
             $search = true;
             return view('events.show', compact('events', 'type', 'data','search'));

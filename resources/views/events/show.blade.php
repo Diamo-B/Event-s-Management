@@ -54,7 +54,7 @@
 
 @section('navbarAdd')
     @isset($search)
-    <div class="relative  w-[40%] self-center right-12 ">
+    <div class="w-[40%] self-center">
         <div class="relative">
             <form action="{{ route('event.search') }}" method="post" class="m-0">
                 @method('POST')

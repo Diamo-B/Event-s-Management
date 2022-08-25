@@ -28,7 +28,6 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        dd('in');
         $request->authenticate();
         if(auth()->user()->roleId == 3)
         {

@@ -14,18 +14,13 @@
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-700 ">Make a new password</h5>
                 <form action="{{ route('password.update') }}" method="post">
                     @csrf
-                    @method('POST')
-                    <div class="my-5">
-                        <label for="Old" class="font-semibold">Old Password</label>
-                        <input type="password" name="Old" id="Old" class="w-full mb-5 text-sm text-gray-700 form-control rounded-lg text-center py-1.5 font-normal bg-white bg-clip-padding border border-solid border-gray-600 transition ease-in-out m-0 focus:ring-0  focus:bg-white focus:border-gray-900 focus:outline-none">
-                    </div>
-                    
-                    <div class="my-5">
+                    @method('POST')            
+                    <div class="mt-5 mb-2">
                         <label for="New" class="font-semibold">New Password</label>
                         <input type="password" name="New" id="New" class="w-full mb-5 text-sm text-gray-700 form-control rounded-lg text-center py-1.5 font-normal bg-white bg-clip-padding border border-solid border-gray-600 transition ease-in-out m-0 focus:ring-0  focus:bg-white focus:border-gray-900 focus:outline-none">
                     </div>
                     
-                    <div class="my-5">
+                    <div class="mt-2 mb-5">
                         <label for="Confirm" class="font-semibold">Confirm Password</label>
                         <input type="password" name="Confirm" id="Confirm" class="w-full  text-sm text-gray-700 form-control rounded-lg text-center py-1.5 font-normal bg-white bg-clip-padding border border-solid border-gray-600 transition ease-in-out m-0 focus:ring-0  focus:bg-white focus:border-gray-900 focus:outline-none">
                     </div>

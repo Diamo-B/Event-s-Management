@@ -4,13 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Mockery\Generator\Method;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Middleware\Authenticate;
-use App\Http\Requests\Auth\LoginRequest;
-use Illuminate\Contracts\Session\Middleware\AuthenticatesSessions;
+
 
 class NewPasswordController extends Controller
 {
@@ -22,15 +19,14 @@ class NewPasswordController extends Controller
     public function store(Request $request)
     {
         $token = $request->input('token');
-        $oldPassword = $request->input('Old');
         $newPassword = $request->input('New');
         $passwordConfirmation = $request->input('Confirm');
         if(User::where('forgetPassword_Token','=',$token)->exists())
         {
             $user = User::where('forgetPassword_Token','=',$token)->get()->first()->getAttributes();
             
-            if (Hash::check($oldPassword, $user['password']) ) 
-            {
+            /* if (Hash::check($oldPassword, $user['password']) ) 
+            { */
                 if ($newPassword == $passwordConfirmation) 
                 {
                     $newPassword = Hash::make($newPassword);
@@ -40,11 +36,11 @@ class NewPasswordController extends Controller
                 {
                     return back()->withErrors('New password and password confirmation don\'t match');    
                 }
-            }
+            /* }
             else 
             {
                 return back()->withErrors('Incorrect Old password. Please Retry'); 
-            }
+            } */
         }
         else 
         {

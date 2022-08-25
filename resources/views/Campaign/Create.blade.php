@@ -46,7 +46,7 @@
                 <br>
 
                 <button type="submit" class="focus:ring-0 w-[50%]  border-4 border-white rounded-3xl px-8 py-1 hover:bg-white group  ">
-                    <span class="text-center text-white text-lg font-bold group-hover:text-indigo-500 group-hover:font-bold">create</span>
+                    <span class="text-center text-white text-lg font-bold group-hover:text-indigo-500 group-hover:font-bold">create & send</span>
                 </button>
 
             </form>

@@ -10,8 +10,8 @@
 </head>
 
 <body class="m-0 h-full">
-    <div class=" bg-indigo-400 absolute top-0 right-0 bottom-0 left-0 grid justify-center justify-items-center items-center">
-        <div class="grid justify-center justify-items-center items-center border-4 border-white border-solid rounded-xl p-8" id="lastbox">
+    <div class=" absolute top-0 right-0 bottom-0 left-0 grid justify-center justify-items-center items-center">
+        <div class="bg-indigo-400 grid justify-center justify-items-center items-center border-4 border-gray-300 border-solid rounded-xl p-8" id="lastbox">
             <p class=" font-medium text-white">Thank you for accepting our invitation. see you there! &#128516;</p>
             <p class=" font-medium text-white">You can close this window</p>
         </div>

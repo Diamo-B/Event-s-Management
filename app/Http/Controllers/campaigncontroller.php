@@ -46,7 +46,7 @@ class campaigncontroller extends Controller
         $status = $request->input('status');
         $invitation = Invitation::where('eventId',$eventId)->get()[0];
         $relaunchNumber = 0;
-        $countComplement = (Campaign::all()->where('status', 'Complement')->count());
+        $countComplement = (Campaign::all()->where('invitationId', $invitation->id )->where('status', 'Complement')->count());
         $count = Campaign::all()->where('invitationId', $invitation->id )->count();
         if ($status == 'Original') 
         {
@@ -216,7 +216,7 @@ class campaigncontroller extends Controller
             {
                 invitationConfirmation::where('eventId',$eventId)->Where('userId',$id)->update(['isPresent'=>true]); 
             }
-            return redirect(route('dashboard'));
+            return redirect(route('dashboard'))->with(['successMsg' => count($presentUserIds).' User(s) have gotten the presence status']);
         }
     }
 }

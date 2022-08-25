@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 //* Dashboard
 Route::get('/dashboard',[dashboardController::class,'index'])->middleware(['auth'])->name('dashboard'); 
-
+Route::any('/settings',[dashboardController::class,'settings'])->middleware(['auth'])->name('settings'); 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //*events
 

@@ -264,7 +264,7 @@ class eventController extends Controller
             $object_sDateTime = DateTime::createFromFormat($format, $startDateTime, $timezone);
             $object_eDateTime = DateTime::createFromFormat($format, $endDateTime, $timezone);
             if ($object_sDateTime > $object_eDateTime) {
-                $message = 'Error: An event can\'t have a starting Datetime that comes after the ending Datetime';
+                $message = 'An event can\'t have a starting Datetime that comes after the ending Datetime';
                 throw new Exception($message);
             }
         } catch (Exception $e) {

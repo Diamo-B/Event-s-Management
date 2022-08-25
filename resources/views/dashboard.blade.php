@@ -26,35 +26,35 @@
         @if ($role == 1)
             <div class="grid grid-cols-3 w-full justify-center">   
              <div class="bg-indigo-400  p-5 shadow-lg rounded-3xl mx-16 py-10  grid gap-4">
-                <p class="relative -top-5 text-center text-2xl font-bold  text-white ">Events</p>
+                <p class="relative -top-5 text-center text-2xl font-bold  text-white ">{{ __('Coordinator/dashboard.Events') }}</p>
                 <button class="border-4 border-white  rounded-3xl mx-6 py-1 bg-white hover:bg-indigo-300 group">
-                    <span class="text-center text-black font-semibold group-hover:text-white"><a href="{{ route('event.create') }}">Create a New Event</a></span>
+                    <span class="text-center text-black font-semibold group-hover:text-white"><a href="{{ route('event.create') }}">{{ __('Coordinator/dashboard.EventsCreate') }}</a></span>
                 </button>
                 <button class="border-4 border-white rounded-3xl mx-6 py-1 bg-white hover:bg-indigo-300 group">
-                    <span class="text-center text-black font-semibold group-hover:text-white"><a href="{{ route('event.index') }}">View Events Info</a></span>
+                    <span class="text-center text-black font-semibold group-hover:text-white"><a href="{{ route('event.index') }}">{{ __('Coordinator/dashboard.EventsView') }}</a></span>
                 </button>
             </div>
 
 
             <div class="p-5 shadow-lg bg-indigo-400 rounded-3xl mx-16 py-10 grid gap-4">
-                <p class="relative -top-5 text-center text-2xl font-bold text-white ">Invitations</p>
+                <p class="relative -top-5 text-center text-2xl font-bold text-white ">{{ __('Coordinator/dashboard.Invite') }}</p>
                 <button class="border-4 border-white rounded-3xl mx-6 py-1 bg-white hover:bg-indigo-300 group">
-                    <span class="text-center text-black font-semibold group-hover:text-white"><a href="{{ route('invitation.create') }}">Create a New Invitation</a></span>
+                    <span class="text-center text-black font-semibold group-hover:text-white"><a href="{{ route('invitation.create') }}">{{ __('Coordinator/dashboard.InviteCreate') }}</a></span>
                 </button>
                 <button class="border-4 border-white rounded-3xl mx-6 py-1 bg-white hover:bg-indigo-300 group">
-                    <span class="text-center text-black font-semibold group-hover:text-white"><a href="{{ route('invitation.index') }}">View Invitation Info</a></span>
+                    <span class="text-center text-black font-semibold group-hover:text-white"><a href="{{ route('invitation.index') }}">{{ __('Coordinator/dashboard.InviteView') }}</a></span>
                 </button>
             </div>
 
 
             <div class="p-5 shadow-lg bg-indigo-400 rounded-3xl mx-16 py-10 grid gap-4">
-                <p class="relative -top-5 text-center text-2xl font-bold text-white">Campaigns</p>
+                <p class="relative -top-5 text-center text-2xl font-bold text-white">{{ __('Coordinator/dashboard.Camp') }}</p>
                 <button class="border-4 border-white rounded-3xl mx-6 py-1 bg-white hover:bg-indigo-300 group">
                     <span class="text-center text-black font-semibold group-hover:text-white"><a href="{{ route('campaign.create') }}">
-                        Create a New Campaigns</span></a>
+                        {{ __('Coordinator/dashboard.CampCreate') }}</span></a>
                 </button>
                 <button class="border-4 border-white rounded-3xl mx-6 py-1 bg-white hover:bg-indigo-300 group-hover:text-white">
-                    <span class="text-center text-black font-semibold"><a href="{{ route('campaign.view') }}">View Campaigns Info</a></span>
+                    <span class="text-center text-black font-semibold"><a href="{{ route('campaign.view') }}">{{ __('Coordinator/dashboard.CampView') }}</a></span>
                 </button>
             </div> 
         </div>
@@ -63,7 +63,7 @@
         
         <div class="grid grid-cols-2 px-52 w-full justify-center ">  
             <div class="p-5 shadow-lg bg-indigo-400 rounded-3xl mx-16 py-10 grid gap-4">
-                <p class="relative -top-5 text-center text-2xl font-bold text-white">Options</p>
+                <p class="relative -top-5 text-center text-2xl font-bold text-white">Data</p>
                 <button class="border-4 border-white rounded-3xl mx-6 py-1 bg-white hover:bg-indigo-300 group">
                     <span class="text-center text-black font-semibold group-hover:text-white"><a href="{{ route('realTimeData') }}">View Real Time Data</a></span>
                 </button>
