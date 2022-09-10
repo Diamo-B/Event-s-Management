@@ -24,29 +24,21 @@ class NewPasswordController extends Controller
         if(User::where('forgetPassword_Token','=',$token)->exists())
         {
             $user = User::where('forgetPassword_Token','=',$token)->get()->first()->getAttributes();
-            
-            /* if (Hash::check($oldPassword, $user['password']) ) 
-            { */
-                if ($newPassword == $passwordConfirmation) 
-                {
-                    $newPassword = Hash::make($newPassword);
-                    User::find($user['id'])->update(array('password'=>$newPassword));
-                }
-                else 
-                {
-                    return back()->withErrors('New password and password confirmation don\'t match');    
-                }
-            /* }
+            if ($newPassword == $passwordConfirmation) 
+            {
+                $newPassword = Hash::make($newPassword);
+                User::find($user['id'])->update(array('password'=>$newPassword));
+            }
             else 
             {
-                return back()->withErrors('Incorrect Old password. Please Retry'); 
-            } */
+                return back()->withErrors('Le nouveau mot de passe et la confirmation du mot de passe ne correspondent pas');    
+            }
         }
         else 
         {
-            return back()->withErrors('An unknown error has occured. Please try again');
+            return back()->withErrors('Une erreur inconnue s\'est produite. Veuillez réessayer');
         }
         Auth::loginUsingId($user['id'], TRUE);
-        return redirect(route('dashboard'))->with('successMsg','Password changed successfully!');
+        return redirect(route('dashboard'))->with('successMsg','Le mot de passe a été changé avec succès!');
     }
 }

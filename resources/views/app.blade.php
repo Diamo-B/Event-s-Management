@@ -7,7 +7,7 @@
     <script src="https://kit.fontawesome.com/f6a25db151.js" crossorigin="anonymous"></script>
     @yield('css')
     @vite('resources/css/app.css')
-    <title>Document</title>
+    <title>Laravel</title>
 </head>
 
 <body class="bg-white">

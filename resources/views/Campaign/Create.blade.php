@@ -15,10 +15,10 @@
     @endif
     <main class="flex text-center rounded-full justify-center align-middle mt-8 mb-28">
         <div class="bg-indigo-400 p-10 border-4 border-indigo-500 rounded-lg">
-            <h1 class="text-center text-3xl font-bold text-white pb-5 mb-5 border-b-2">Create Campaign</h1>
+            <h1 class="text-center text-3xl font-bold text-white pb-5 mb-5 border-b-2">Creation d'une Nouvelle Campagne</h1>
             <form action="{{ route('campaign.store') }}" enctype="multipart/form-data" method="post">
                 @csrf
-                <label for="event" class="text-center text-2xl font-bold text-white">Event</label>
+                <label for="event" class="text-center text-2xl font-bold text-white">Evènements</label>
                 <select name="event" id="event" class="form-select w-full mb-5 py-1.5 text-center text-base font-semibold text-gray-700 border border-solid rounded-lg border-gray-600 bg-white focus:text-gray-700  focus:border-gray-900 focus:outline-none focus:ring-0 " > 
                     @if (isset($event))
                     <option value="{{ $event->id }}">{{ $event->title }}</option>
@@ -31,11 +31,11 @@
                 
                 <br>
 
-                <label for="status" class="text-center text-2xl font-bold text-white">Status</label><br>
+                <label for="status" class="text-center text-2xl font-bold text-white">statut</label><br>
                 <select name="status" id="status" class="form-select  mb-5 p-1.5 pr-5 text-center text-base font-semibold text-gray-700 border border-solid rounded-lg border-gray-600 bg-white focus:text-gray-700   focus:border-gray-900  focus:outline-none focus:ring-0">
-                    <option value="Original">Original</option>
-                    <option value="Relanch">Relaunch</option>
-                    <option value="Complement">Complement</option>
+                    <option value="Original">Originale</option>
+                    <option value="Relanch">Relance</option>
+                    <option value="Complement">Complément</option>
                 </select>
 
                 <br>
@@ -45,8 +45,8 @@
 
                 <br>
 
-                <button type="submit" class="focus:ring-0 w-[50%]  border-4 border-white rounded-3xl px-8 py-1 hover:bg-white group  ">
-                    <span class="text-center text-white text-lg font-bold group-hover:text-indigo-500 group-hover:font-bold">create & send</span>
+                <button type="submit" class="focus:ring-0 border-4 border-white rounded-3xl px-8 py-1 hover:bg-white group  ">
+                    <span class="text-center text-white text-lg font-bold group-hover:text-indigo-500 group-hover:font-bold">Créer et Envoyer la Campagne</span>
                 </button>
 
             </form>

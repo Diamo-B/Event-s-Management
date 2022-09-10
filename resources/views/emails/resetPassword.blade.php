@@ -20,13 +20,13 @@
     }
 </style>
 <div style='text-align:center; padding-left:80px; padding-right:80px; padding-top:25px; padding-bottom:25px;'>
-    <h1>Password Reset</h1>
+    <h1>Réinitialiser le mot de passe</h1>
     <p>
-        Hello,<br>
-        We've recelved a request to reset the password for the account
-        account associated with {{ $email }}. <br> No changes
-        have been made to your account yet. <br>
-        You can reset the password by clicking in the button below.
+        Bonjour,<br>
+        Nous avons reçu une demande de réinitialisation du mot de passe du compte
+        associé à {{ $email }}. <br> Aucun changement
+        n'a encore été effectué sur votre compte. <br>
+        Vous pouvez réinitialiser le mot de passe en cliquant sur le bouton ci-dessous.
     </p>
 
     <a href="{{ route('password.reset',$rememberPasswordToken) }}">
@@ -45,16 +45,16 @@
                 color: white; 
                 font-weight: 700; 
                 text-align: center;">
-                Change Password
+                Changer le Mot de passe
             </span>
         
         </button>
     </a>
     <br>
     <p>
-        If you have a hard time clicking on the button you can use the following link: <br>
+        Si vous avez du mal à cliquer sur le bouton vous pouvez utiliser le lien suivant: <br>
         <a href="{{ route('password.reset',$rememberPasswordToken) }}">http://127.0.0.1:8000/reset-password/{{ $rememberPasswordToken }}</a><br>
-        If you did not request a new password, please let us know by replying to this email.
+        Si vous n'avez pas demandé de nouveau mot de passe, veuillez nous en informer en répondant à cet e-mail.
     </p>
 
 

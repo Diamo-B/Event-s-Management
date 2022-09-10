@@ -264,7 +264,7 @@ class eventController extends Controller
             $object_sDateTime = DateTime::createFromFormat($format, $startDateTime, $timezone);
             $object_eDateTime = DateTime::createFromFormat($format, $endDateTime, $timezone);
             if ($object_sDateTime > $object_eDateTime) {
-                $message = 'An event can\'t have a starting Datetime that comes after the ending Datetime';
+                $message = 'Un événement ne peut pas avoir une date/heure de début postérieure à la date/heure de fin';
                 throw new Exception($message);
             }
         } catch (Exception $e) {
@@ -282,7 +282,7 @@ class eventController extends Controller
 
         $thisEvent->save();
 
-        Session::flash('successMsg', 'Event Created successfully.');
+        Session::flash('successMsg', 'Événement créé avec succès.');
         return redirect(route('dashboard'));
     }
 

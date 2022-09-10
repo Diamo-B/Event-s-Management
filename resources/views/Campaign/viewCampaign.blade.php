@@ -7,42 +7,42 @@
                 <div class="flex text-center rounded-full w-full justify-center ">
                     <div class="bg-indigo-400 py-10  border-4 border-indigo-500 rounded-lg  ">
                         
-                        <label for="Event" class="text-center text-3xl text-white font-bold">Event</label>
+                        <label for="Event" class="text-center text-3xl text-white font-bold">Evènement</label>
                         <h3 class="mb-5 text-xl text-gray-500 font-semibold">{{ $event['title'] }}</h3>
                         
                         <div class="w-full mb-5 px-7 text-lg text-white font-semibold">
                             @if ($CampaignsCount == 0)
-                            <p class='w-30'> This Event has no campaigns</p>
+                            <p class='w-30'>Cet événement n'a pas de campagnes</p>
                             @elseif ($CampaignsCount == 1)
-                                <p> This Event has a single original campaign</p>
+                                <p>Cet événement a une seule campagne originale</p>
                             @elseif ($CampaignRelaunchesNumber > 0 && $CampaignComplementsNumber == 0)
-                                <p>This Event has {{ $CampaignsCount }} campaigns:<br>one original campaign, and
+                                <p>Cet événement a {{ $CampaignsCount }} campagnes:<br>une seule campagne originale, et
                                 {{ $CampaignRelaunchesNumber }}
                                 @if ($CampaignRelaunchesNumber == 1)
-                                    relaunch
+                                    relance
                                 @else
-                                    relaunches
+                                    relances
                                 @endif
                                 </p>
                             @else
-                                <p>This Event has {{ $CampaignsCount }} campaigns:<br>one original campaign,
+                                <p>Cet événement a {{ $CampaignsCount }} campagnes:<br>une seule campagne originale,
                                 {{ $CampaignRelaunchesNumber }}
                                 @if ($CampaignRelaunchesNumber == 1)
-                                    relaunch, and
+                                    relance, et
                                 @else
-                                    relaunches, and
+                                    relances, et
                                 @endif
                                 {{ $CampaignComplementsNumber }}
                                 @if ($CampaignComplementsNumber == 1)
-                                    complement.
+                                    complément.
                                 @else
-                                    complements
+                                    compléments
                                 @endif
                                 </p>
                             @endif
                             <br>
                             @if ($stop == true)
-                                <p>where all the users were confirmed as present</p>
+                                <p>où tous les utilisateurs ont été marqués comme présents</p>
                             @endif
                         </div>
 
@@ -54,14 +54,14 @@
                                 action="{{ route('realTimeData', ['eventId' => $event['id']]) }}">
                                 @csrf
                                 <button type="submit" class="focus:ring-0 border-4 border-white rounded-3xl mx-5 px-8 py-1 hover:bg-white group  ">
-                                    <span class="text-center text-white text-lg font-bold group-hover:text-indigo-500 group-hover:font-bold">view participants attandance</span>
+                                    <span class="text-center text-white text-lg font-bold group-hover:text-indigo-500 group-hover:font-bold">Consulter la présence des participants</span>
                                 </button>
                             @elseif (!isset($viewData) && $stop == false)
                                 <form method="POST"
                                 action="{{ route('presenceConfirm', ['eventId' => $event['id'], 'campaigns' => $Campaigns->toJson(JSON_PRETTY_PRINT)]) }}">
                                 @csrf
                                 <button type="submit" class="focus:ring-0 border-4 border-white rounded-3xl mx-5 px-8 py-1 hover:bg-white group  ">
-                                    <span class="text-center text-white text-lg font-bold group-hover:text-indigo-500 group-hover:font-bold">Confirm participants attandance</span>
+                                    <span class="text-center text-white text-lg font-bold group-hover:text-indigo-500 group-hover:font-bold">Confirmer la présence des participants</span>
                                 </button>
                                 </form>
                             @endif
@@ -83,21 +83,21 @@
                                     <thead class="text-sm text-gray-700 bg-indigo-400 ">
                                         <tr>
                                             <th scope="col" class="py-3">
-                                                First Name
+                                                Prénom
                                             </th>
                                             <th scope="col" class="py-3">
-                                                Last Name
+                                                Nom
                                             </th>
                                             <th scope="col" class="py-3 px-8">
-                                                Email
+                                                Adresse mail
                                             </th>
                                             @isset($viewusers)
                                                 <th scope="col" class="py-3 px-6">
-                                                    hasConfirmed
+                                                    Confirmé
                                                 </th>
                                             @endisset
                                             <th scope="col" class="py-3 px-6">
-                                                isPresent
+                                                Présent
                                             </th>
                                             <!--------------------------------------------------------------------->
                                         </tr>
@@ -182,7 +182,7 @@
                             </div>
                             @isset($users)
                             <button type="submit" class="w-fit border-4 border-gray-300 rounded-3xl px-8 py-1 hover:bg-indigo-400 group  ">
-                                <span class="text-center text-gray-500 text-lg font-bold  group-hover:text-white">Confirm Attandance</span>
+                                <span class="text-center text-gray-500 text-lg font-bold  group-hover:text-white">Confirmer la Présence</span>
                             </button>
                             @endisset
                         </div>

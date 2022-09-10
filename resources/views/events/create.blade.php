@@ -22,26 +22,26 @@
     @endif 
     <main class="grid text-center rounded-full justify-center align-middle mt-14 mb-28">
         <div class="bg-indigo-400 p-10 border-4 border-indigo-500 rounded-lg">
-            <h1 class="text-center text-3xl font-bold text-white pb-5 mb-5 border-b-2">{{ __('Coordinator/EventCreate.containertitle') }}</h1>
+            <h1 class="text-center text-3xl font-bold text-white pb-5 mb-5 border-b-2">Création d'un nouvel évènement</h1>
             <form action="{{ route('event.store') }}" method="post">
                 @csrf
-                <label for="Title" class="text-center text-2xl font-black text-white">{{ __('Coordinator/EventCreate.title') }}</label><br>
+                <label for="Title" class="text-center text-2xl font-black text-white">Titre de l'évènement</label><br>
                 <input type="text" name="Title" id="Title" class="w-full mb-5 text-sm text-gray-700 form-control rounded-lg text-center py-1.5 font-normal bg-white bg-clip-padding border border-solid border-gray-600 transition ease-in-out m-0 focus:ring-0  focus:bg-white focus:border-gray-900 focus:outline-none">
                 <br>
-                <label for="desc" class="text-center text-2xl font-bold text-white">{{ __('Coordinator/EventCreate.desc') }}</label><br>
+                <label for="desc" class="text-center text-2xl font-bold text-white">Description du but de l'évènement</label><br>
                 <textarea id="desc" name="Object" rows="4" class="mb-5 p-2.5 w-full text-sm text-gray-700 rounded-lg border bg-white border-gray-600 placeholder-gray-400   focus:border-gray-900  focus:outline-none focus:ring-0" placeholder="{{ __('Coordinator/EventCreate.descPlaceholder') }}"></textarea>
 
                 <div class="flex mb-5 items-center">
                     <div class=" datepicker relative  " data-mdb-toggle-button="false">
                         <input type="text" name="Starting_date" id="sDate"
                             class="form-control text-center py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border-gray-600 placeholder-gray-400  border border-solid rounded transition focus:border-gray-900  focus:outline-none focus:ring-0  focus:bg-white "
-                            placeholder="{{ __('Coordinator/EventCreate.Sdate') }}" data-mdb-toggle="datepicker" autocomplete="off"/>
+                            placeholder="date de début" data-mdb-toggle="datepicker" autocomplete="off"/>
                     </div>
-                    <div class="text-white">{{ __('Coordinator/EventCreate.To') }}</div>
+                    <div class="text-white">vers</div>
                     <div class="datepicker relative " data-mdb-toggle-button="false">
                         <input type="text" name="Ending_date" 
                         class="form-control text-center py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border-gray-600 placeholder-gray-400  border border-solid rounded transition focus:border-gray-900  focus:outline-none focus:ring-0  focus:bg-white "
-                        placeholder="{{ __('Coordinator/EventCreate.Edate') }}" data-mdb-toggle="datepicker"  autocomplete="off"/>
+                        placeholder="date de fin" data-mdb-toggle="datepicker"  autocomplete="off"/>
                     </div>
                 </div>
                 
@@ -49,25 +49,25 @@
                     <div class="timepicker relative form-floating" data-mdb-with-icon="false" id="input-toggle-timepicker">
                       <input type="text" name="Starting_time"
                         class=" text-center py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-600 placeholder-gray-400 rounded transition focus:border-gray-900 focus:outline-none focus:ring-0  focus:bg-white"
-                        placeholder="{{ __('Coordinator/EventCreate.Stime') }}" data-mdb-toggle="input-toggle-timepicker"  autocomplete="off"/>
+                        placeholder="Temps de début" data-mdb-toggle="input-toggle-timepicker"  autocomplete="off"/>
     
                     </div>
-                    <div class="text-white">{{ __('Coordinator/EventCreate.To') }}</div>
+                    <div class="text-white">vers</div>
                     <div class="timepicker relative form-floating" data-mdb-with-icon="false" id="input-toggle-timepicker">
                         <input type="text" name="Ending_time"
                             class=" text-center py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-600 placeholder-gray-400 rounded transition focus:border-gray-900 focus:outline-none focus:ring-0  focus:bg-white"
-                          placeholder="{{ __('Coordinator/EventCreate.Etime') }}" data-mdb-toggle="input-toggle-timepicker"  autocomplete="off"/>
+                          placeholder="Temps de fin" data-mdb-toggle="input-toggle-timepicker"  autocomplete="off"/>
                     </div>
                 </div>
                 
-                <label for="location" class="text-center text-2xl font-bold text-white">{{ __('Coordinator/EventCreate.Location') }}</label><br>
+                <label for="location" class="text-center text-2xl font-bold text-white">Lieu</label><br>
                 <input type="text" name="location" id="Location" class="w-full mb-5 text-sm text-gray-700 form-control  rounded-lg  text-center py-1.5 font-normal bg-white bg-clip-padding border border-solid border-gray-600 transition  focus:ring-0  focus:bg-white focus:border-gray-900 focus:outline-none">
                 <br>
-                <label for="room" class="text-center text-2xl font-bold text-white">{{ __('Coordinator/EventCreate.Room') }}</label><br>
+                <label for="room" class="text-center text-2xl font-bold text-white">Salle</label><br>
                 <input type="text" name="room" id="room" class="w-full mb-10 text-sm text-gray-700 form-control  rounded-lg  text-center py-1.5 font-normal bg-white bg-clip-padding border border-solid border-gray-600 transition  focus:ring-0  focus:bg-white focus:border-gray-900 focus:outline-none">
                 <br>
                 <button type="submit" class="focus:ring-0 w-[50%]  border-4 border-white rounded-3xl px-8 py-1 hover:bg-white group  ">
-                    <span class="text-center text-white text-lg font-semibold group-hover:text-indigo-500 group-hover:font-bold">{{ __('Coordinator/EventCreate.button') }}</span>
+                    <span class="text-center text-white text-lg font-semibold group-hover:text-indigo-500 group-hover:font-bold">Créer</span>
                 </button>
     
             </form>

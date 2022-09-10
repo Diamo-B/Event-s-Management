@@ -90,7 +90,7 @@ class invitationController extends Controller
         );
         $invitation->save();
         $invitation->event()->associate($event)->save();
-        Session::flash('successMsg','Invitation Created successfully'); 
+        Session::flash('successMsg','Invitation créée avec succès'); 
         return redirect(route('dashboard'));
     }
 

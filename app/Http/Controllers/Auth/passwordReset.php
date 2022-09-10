@@ -21,13 +21,13 @@ class passwordReset extends Controller
         $checkMail = User::where('email', '=', $email)->exists()?true:false;
         if ($checkMail == false)
         {
-            return back()->withErrors('no user with that email was found in our database');
+            return back()->withErrors('Aucun utilisateur avec cet email n\'a été trouvé dans notre base de données');
         }
         else 
         {
             $mailController = new mailController;
             $mailController->sendForgetPass($email);
-            return redirect(route('login'))->with(['successMsg'=>'Email was sent successfully!']);
+            return redirect(route('login'))->with(['successMsg'=>'L\'e-mail a été envoyé avec succès!']);
         }
     }
 }

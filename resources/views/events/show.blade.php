@@ -61,10 +61,10 @@
                 @csrf
                 <!-- search -->
                 <input type="search" id="default-search" name="search"
-                    class="w-[68%] text-sm text-white bg-indigo-400 rounded-lg border-2 border-white focus:border-white focus:outline-none  focus:font-bold   placeholder:text-white placeholder:font-bold"
-                    placeholder="Search Any Event By Name Or Location">
-                <button type="submit" class="text-black absolute right-20 bottom-1 bg-white border-2 border-white hover:bg-indigo-400 hover:text-white  font-medium rounded-lg text-sm px-4 py-1">
-                    Search
+                    class=" right-5 w-[63%] text-sm text-white bg-indigo-400 rounded-lg border-2 border-white focus:border-white focus:outline-none  focus:font-bold   placeholder:text-white placeholder:font-bold"
+                    placeholder="Rechercher un événement par titre ou lieu">
+                <button type="submit" class="text-black absolute right-[78px] bottom-1 bg-white border-2 border-white hover:bg-indigo-400 hover:text-white  font-medium rounded-lg text-sm px-4 py-1">
+                    Rechercher
                 </button>
             </form>
 
@@ -73,7 +73,7 @@
                 @method('POST')
                 @csrf
                 <!-- filter button -->
-                <button type="button" class="text-black absolute left-[85%] bottom-1 bg-white border-2 border-white hover:bg-indigo-400 hover:text-white  font-medium rounded-lg text-sm px-4 py-1" onclick="showFilter()">
+                <button type="button" class="text-black absolute left-[85.5%] bottom-1 bg-white border-2 border-white hover:bg-indigo-400 hover:text-white  font-medium rounded-lg text-sm px-4 py-1" onclick="showFilter()">
                     <i class="fa-solid fa-filter"></i><i class="fa-solid fa-caret-down"></i>
                 </button>
 
@@ -81,24 +81,24 @@
                 <div id='filter_panel' class="absolute hidden text-sm w-[63%] z-50 text-gray-600 font-semibold " style='margin-left: 350px;'>
                     <div class=" grid grid-cols-5 mt-3 py-5 bg-indigo-300 rounded-2xl ">
                         <div class="border-b-2 col-span-5  border-solid border-white w-full flex justify-between space-x-4 px-5 h-fit py-2 ">
-                            <p class="inline-block col-span-4 ">Nearest events</p>
+                            <p class="inline-block col-span-4 ">Evénements les plus proches</p>
                             <input name="SearchCrit" type="checkbox" value="nearest" class="inline-block col-span-1 text-indigo-500 bg-gray-100 rounded border-gray-300" onclick="checkboxChange(this)"></input>
                         </div>
                         <div class="border-y-2 col-span-5  border-solid border-white w-full flex justify-between space-x-4 px-5 h-fit py-2 ">
-                            <p class="inline-block col-span-4 ">Latest events</p>
+                            <p class="inline-block col-span-4 ">Événements les plus loins</p>
                             <input name="SearchCrit" type="checkbox" value="latest" class="inline-block col-span-1 text-indigo-500 bg-gray-100 rounded border-gray-300" onclick="checkboxChange(this)"></input>
                         </div>
                         <div class="border-y-2 col-span-5  border-solid border-white w-full flex space-x-4 justify-between px-5 h-fit py-2">
-                            <p class="inline-block col-span-4 ">Events With Campaigns</p>
+                            <p class="inline-block col-span-4 ">Événements avec campagnes</p>
                             <input name="SearchCrit" type="checkbox" value="camp" class="inline-block col-span-1 text-indigo-500 bg-gray-100 rounded border-gray-300" onclick="checkboxChange(this)"></input>
                         </div>
                         <div class="border-t-2 border-b-4 col-span-5  border-solid border-white w-full flex space-x-4 justify-between px-5 h-fit py-2">
-                            <p class="inline-block col-span-4 ">Events Without Campaigns</p>
+                            <p class="inline-block col-span-4 ">Événements sans campagne</p>
                             <input name="SearchCrit" type="checkbox" value="nocamp" class="inline-block col-span-1 text-indigo-500 bg-gray-100 rounded border-gray-300" onclick="checkboxChange(this)"></input>
                         </div>
                         <div class="mt-2 col-span-5  border-solid border-white w-full flex justify-center px-5 h-fit py-2">
                             <button name="submit" value="filter" type="submit" class="col-span-5 w-fit text-center  border-4 border-white rounded-3xl px-10 py-1 hover:bg-indigo-200 group ">
-                                <span class="text-center text-gray-800 text-md font-bold  group-hover:text-white">Filter</span>
+                                <span class="text-center text-gray-800 text-md font-bold  group-hover:text-white">Filtrer</span>
                             </button>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
     <!-- -----------------------------------------     index  && Search    --------------------------------------------- -->
     @isset($events)
     <main> 
-        <p class='mt-3 text-center w-full text-3xl text-gray-700 font-bold'>View Events</p>
+        <p class='mt-3 text-center w-full text-3xl text-gray-700 font-bold'>Consulter les évènements</p>
         @if($errors->any())
             <div class="grid grid-cols-1 w-full mt-3 justify-items-center" id="alert">
                 <div class="flex p-4 text-sm w-fit text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
@@ -148,16 +148,16 @@
                     <thead class="text-xs text-gray-700 uppercase bg-indigo-400 ">
                         <tr>
                             <th scope="col" class="py-3 px-40 text-left">
-                                Event's title
+                                Titre de l'événement
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                Starting On
+                                À partir de
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                Ending On
+                                Jusqu'a
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                <span class="sr-only">Details</span>
+                                <span class="sr-only">Détails</span>
                             </th>
                         </tr>
                     </thead>
@@ -179,30 +179,30 @@
                                             <form action="{{ route('realTimeData') }}" method="POST">
                                                 @csrf
                                                 <input type="text" class=" hidden" name="Event" value="{{ $event['id'] }}">
-                                                <button type='submit' class=" group-hover:text-white hover:font-semibold">View Details</button>
+                                                <button type='submit' class=" group-hover:text-white hover:font-semibold">Afficher les Détails</button>
                                             </form>
                                         @elseif(isset($Historydata))
                                             <form action="{{ route('history') }}" method="POST">
                                                 @csrf
                                                 <input type="text" class=" hidden" name="Event" value="{{ $event['id']  }}">
-                                                <button type='submit' class=" group-hover:text-white hover:font-semibold">View Details</button>
+                                                <button type='submit' class=" group-hover:text-white hover:font-semibold">Afficher les Détails</button>
                                             </form>
                                         @elseif(isset($type) && $type == 'DataStat')
                                             <form action="{{ route('DataStats') }}" method="POST">
                                                 @csrf
                                                 <input type="text" class=" hidden" name="Events" value="{{ $event['id']  }}">
-                                                <button type='submit' class=" group-hover:text-white hover:font-semibold">View Details</button>
+                                                <button type='submit' class=" group-hover:text-white hover:font-semibold">Afficher les Détails</button>
                                             </form>
                                         @elseif(isset($type) && $type == 'HistoryStat')
                                             <form action="{{ route('HistoryStats') }}" method="POST">
                                                 @csrf
                                                 <input type="text" class=" hidden" name="Events" value="{{ $event['id']  }}">
-                                                <button type='submit' class=" group-hover:text-white hover:font-semibold">View Details</button>
+                                                <button type='submit' class=" group-hover:text-white hover:font-semibold">Afficher les Détails</button>
                                             </form>
                                         @else
                                             
                                             <a href="{{ route('event.show', $event['id']) }}"
-                                                class=" group-hover:text-white hover:font-semibold">View Details
+                                                class=" group-hover:text-white hover:font-semibold">Afficher les Détails
                                             </a>
                                         @endif
                                     </td>
@@ -229,58 +229,53 @@
     @isset($details)
     <main class="my-10 mb-28"> 
             <div class="grid justify-center items-center mx-20">
-                <h1 class="text-4xl font-semibold mb-10 text-gray-400">Event's Details</h1>
+                <h1 class="text-4xl font-semibold mb-10 text-gray-400">Détails de l'événement</h1>
                 <div class=" relative shadow-2xl mb-5  rounded-xl bg-indigo-400">
                     <table class="w-full text-base text-center text-white">
                             <tr scope="row" class='border-b-4 rounded-xl hover:bg-indigo-300'>
-                              <th class="py-3 mx-16 border-r-4 ">Event's Title</th>
+                              <th class="py-3 mx-16 border-r-4 "> Titre de l'événement</th>
                               <td class="px-10">{{ $details->title }}</td>
                             </tr>
                             <tr scope="row" class='border-b-4 hover:bg-indigo-300'>
-                              <th class="py-3 px-16 border-r-4">Description</th>
+                              <th class="py-3 px-16 border-r-4">Description de l'évènement</th>
                               <td class="px-10">{{ $details->object }}</td>
                             </tr>
                             <tr scope="row" class='border-b-4 hover:bg-indigo-300'>
-                              <th class="py-3 px-6 border-r-4">Starting On</th>
+                              <th class="py-3 px-6 border-r-4">À partir de</th>
                               <td class="px-10">{{ $Date_Time[0] }}</td>
                             </tr>
                             <tr scope="row" class='border-b-4 hover:bg-indigo-300'>
-                                <th class="py-3 px-6 border-r-4">At</th>
+                                <th class="py-3 px-6 border-r-4">À</th>
                                 <td class="px-10">{{ $Date_Time[2] }}</td>
                             </tr>
                             <tr scope="row" class='border-b-4 hover:bg-indigo-300'>
-                                <th class="py-3 px-6 border-r-4">Ending On</th>
+                                <th class="py-3 px-6 border-r-4">Jusqu'a</th>
                                 <td class="px-10">{{ $Date_Time[1] }}</td>
                             </tr>
                             <tr scope="row" class='border-b-4 hover:bg-indigo-300'>
-                                <th class="py-3 px-6 border-r-4">At</th>
+                                <th class="py-3 px-6 border-r-4">À</th>
                                 <td class="px-10">{{ $Date_Time[3] }}</td>
                             </tr>
                             <tr scope="row" class='border-b-4 hover:bg-indigo-300'>
-                                <th class="py-3 px-6 border-r-4">Location</th>
+                                <th class="py-3 px-6 border-r-4">Lieu</th>
                                 <td class="px-10">{{ $details->location }}</td>
                             </tr>
-                            <tr scope="row" class='border-b-4 hover:bg-indigo-300' >
-                                <th class="py-3 px-6 border-r-4 hover:bg-indigo-300">Room</th>
+                            <tr scope="row" class=' hover:bg-indigo-300' >
+                                <th class="py-3 px-6 border-r-4 hover:bg-indigo-300">Salle</th>
                                 <td class="px-10">{{ $details->room }}</td>
                             </tr>
-                            <tr>
-                                <th class="py-10 px-6 hover:bg-indigo-300 "></th>
-                                <td>
-                                    @isset($showButton)
-                                        <form action="" method="POST"> 
-                                            @csrf
-                                            <input type="text" class="hidden" name="eventTitle" value="{{ $details->title }}">
-                                            <button type="submit" class="focus:ring-0 border-4 border-gray-400 rounded-3xl px-8 py-1 hover:border-indigo-700 hover:bg-indigo-400 group  ">
-                                                <span class="text-center text-gray-600 text-lg font-semibold group-hover:text-white  ">view Campaigns</span>
-                                            </button>
-                                        </form>
-                                    @endisset
-                                </td>
-                            </tr>
-                    </table>  
-                    
-                </div>
+                        </table>  
+                        
+                    </div>
+                    @isset($showButton)
+                        <form action="" method="POST" class="flex justify-center"> 
+                            @csrf
+                            <input type="text" class="hidden" name="eventTitle" value="{{ $details->title }}">
+                            <button type="submit" class="focus:ring-0 border-4 border-gray-400 rounded-3xl px-8 py-1 hover:border-gray-500 hover:bg-indigo-400 group  ">
+                                <span class="text-center text-gray-600 text-lg font-semibold group-hover:text-white  ">Voire les information des Campagnes</span>
+                            </button>
+                        </form>
+                    @endisset
              
             </div>
             

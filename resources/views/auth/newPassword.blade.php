@@ -11,23 +11,23 @@
     <section class=" my-auto shadow-2xl rounded-xl">
         <div class="max-w-sm bg-white rounded-xl border border-gray-200 shadow-xl text-center ">
             <div class="p-5">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-700 ">Make a new password</h5>
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-700 ">Créer un nouvel mot de passe</h5>
                 <form action="{{ route('password.update') }}" method="post">
                     @csrf
                     @method('POST')            
                     <div class="mt-5 mb-2">
-                        <label for="New" class="font-semibold">New Password</label>
+                        <label for="New" class="font-semibold">Nouveau mot de passe</label>
                         <input type="password" name="New" id="New" class="w-full mb-5 text-sm text-gray-700 form-control rounded-lg text-center py-1.5 font-normal bg-white bg-clip-padding border border-solid border-gray-600 transition ease-in-out m-0 focus:ring-0  focus:bg-white focus:border-gray-900 focus:outline-none">
                     </div>
                     
                     <div class="mt-2 mb-5">
-                        <label for="Confirm" class="font-semibold">Confirm Password</label>
+                        <label for="Confirm" class="font-semibold">Confirmez le mot de passe</label>
                         <input type="password" name="Confirm" id="Confirm" class="w-full  text-sm text-gray-700 form-control rounded-lg text-center py-1.5 font-normal bg-white bg-clip-padding border border-solid border-gray-600 transition ease-in-out m-0 focus:ring-0  focus:bg-white focus:border-gray-900 focus:outline-none">
                     </div>
             </div>
                 <input type="hidden" value="{{ $token }}" name="token">
-                <button type="submit" class="focus:ring-0 w-[60%] mb-5 border-4 border-gray-700 rounded-3xl px-8 py-1 hover:bg-indigo-500 hover:border-gray-300 group">
-                    <span class="text-center text-gray-700 text-base font-semibold  group-hover:text-white group-hover:font-bold">Reset password</span>
+                <button type="submit" class="focus:ring-0  mb-5 border-4 border-gray-700 rounded-3xl px-8 py-1 hover:bg-indigo-500 hover:border-gray-300 group">
+                    <span class="text-center text-gray-700 text-base font-semibold  group-hover:text-white group-hover:font-bold">Réinitialiser le mot de passe</span>
                 </button>
                 </form>
         </div>

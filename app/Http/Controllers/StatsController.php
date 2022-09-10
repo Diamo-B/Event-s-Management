@@ -138,7 +138,7 @@ class StatsController extends Controller
             $eventAttendance_Total = ($attendedUsersCount / count($participantIds)) * 100;   //? the atteded users compared to the the totality of the participants
         } catch (DivisionByZeroError $err) 
         {
-            return back()->withError('No Actual users with the role participant in the database ');
+            return back()->withError('Aucun utilisateur réel avec le rôle participant dans la base de données');
         }
         try 
         {
@@ -146,7 +146,7 @@ class StatsController extends Controller
             $eventAttendanceRate = ($attendedUsersCount / $invitedUsersCount) * 100;        //? the attended users compared to the invited users
         } catch (DivisionByZeroError $err) 
         {
-            return back()->withError('No Actual users were invited to the event "'.$event['title'].'"');
+            return back()->withError('Aucun utilisateur n\'a été invité à l\'événement "'.$event['title'].'"');
         }
 
         /*

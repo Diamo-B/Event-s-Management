@@ -12,17 +12,17 @@
     <section class=" my-auto shadow-2xl rounded-xl">
         <div class="max-w-sm bg-white rounded-xl border border-gray-200 shadow-xl text-center ">
             <div class="px-5">
-                <h2 class=" mt-3 mb-8 text-2xl text-gray-700 font-semibold ">Forgot your password?</h2>
-                <p class=" mb-5 text-left text-base text-gray-500 ">Don't fret! Just type in your email and we will send you a code to reset your password!</p>
+                <h2 class=" mt-3 mb-8 text-2xl text-gray-700 font-semibold ">Vous avez oublié votre mot de passe?</h2>
+                <p class=" mb-5 text-center text-base text-gray-500 ">Pas de soucis!! Entrer votre adresse gmail et tout va être bon &#128516;</p>
                 <form action="{{ route('password.forget.sendEmail') }}" method="post">
                     @method('POST')
                     @csrf
-                    <label for="email" class="font-semibold">Your email</label>
+                    <label for="email" class="font-semibold">Votre adresse gmail</label>
                     <input type="email" name="email" id="email" placeholder="example@gmail.com" class="w-full mb-5 text-sm text-gray-700 form-control rounded-lg text-center py-1.5 font-normal bg-white bg-clip-padding border border-solid border-gray-600 transition ease-in-out m-0 focus:ring-0  focus:bg-white focus:border-gray-900 focus:outline-none">
 
-                    <button type="submit" class="my-5 w-[60%] border-4 border-gray-500 rounded-3xl px-8 py-1 hover:bg-indigo-500 hover:border-gray-300 group">
+                    <button type="submit" class="my-5 border-4 border-gray-500 rounded-3xl px-8 py-1 hover:bg-indigo-500 hover:border-gray-300 group">
                         <span class="text-center text-gray-700 text-base font-semibold  group-hover:text-white group-hover:font-bold">
-                            Reset password
+                            Réinitialiser le mot de passe
                         </span>
                     </button>
                 </form>

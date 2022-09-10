@@ -51,7 +51,7 @@ class campaigncontroller extends Controller
         if ($status == 'Original') 
         {
             if ($count > 0)
-                return back()->withErrors(['The invitation of the event ' . $event->title . ' already has an original Campaign']);
+                return back()->withErrors(['L\'invitation de l\'événement ' . $event->title. ' a déjà une campagne d\'origine']);
             else
                 goto makeCampaign;
         }
@@ -59,7 +59,7 @@ class campaigncontroller extends Controller
         {
             if ($count == 0) 
             {
-                return back()->withErrors(['The invitation of the event ' . $event->title . ' needs to have an original Campaign before relaunches or complements']);
+                return back()->withErrors(['L\'invitation de l\'événement  ' . $event->title . 'doit avoir une campagne originale avant les relances ou les compléments']);
             }
             if ($status == 'Relanch') 
             {
@@ -85,7 +85,7 @@ class campaigncontroller extends Controller
         $mailController = new mailController;
         $mailController->send($request,$originalData,$data,$status,$invitation,$event,$Campaign);
 
-        Session::flash('successMsg','Campaign created and emails were sent successfully.'); 
+        Session::flash('successMsg','La campagne a été créée et les e-mails ont été envoyés avec succès.'); 
         return redirect(route('dashboard'));
     }
 
@@ -216,7 +216,7 @@ class campaigncontroller extends Controller
             {
                 invitationConfirmation::where('eventId',$eventId)->Where('userId',$id)->update(['isPresent'=>true]); 
             }
-            return redirect(route('dashboard'))->with(['successMsg' => count($presentUserIds).' User(s) have gotten the presence status']);
+            return redirect(route('dashboard'))->with(['successMsg' => count($presentUserIds).' utilisateur(s) a/ont obtenu(s) le statut de présence']);
         }
     }
 }

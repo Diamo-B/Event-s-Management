@@ -78,9 +78,9 @@
             <div class="w-full mt-1">
                 <div class="rounded-lg shadow-2xl">
                     <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden text-center hover:bg-indigo-400 group">
-                        <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Invited Users</h3>
+                        <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Personnes invitées</h3>
                         <p class="text-5xl mt-8 font-bold text-teal-500 group-hover:text-pink-300">{{ $invitedUsersCount }} </p> 
-                        <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">from {{ count($participantIds) }} users with participant role</p>
+                        <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">Depuis {{ count($participantIds) }} Participant(s)</p>
                     </div>
                 </div>
             </div>
@@ -90,9 +90,9 @@
             <div class="w-full mt-1">
                 <div class="rounded-lg shadow-2xl">
                     <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden text-center hover:bg-indigo-400 group">
-                        <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Confirmed Users</h3>
+                        <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Personnes confirmées</h3>
                         <p class="text-5xl mt-8 font-bold text-teal-500 group-hover:text-pink-300">{{ $acceptedUsersCount }} </p> 
-                        <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">from {{ $invitedUsersCount }} invited users</p>
+                        <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">Depuis {{ $invitedUsersCount }} invitées</p>
                     </div>
                 </div>
             </div>
@@ -102,9 +102,9 @@
             <div class="w-full mt-1">
                 <div class="rounded-lg shadow-2xl">
                     <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden text-center hover:bg-indigo-400 group">
-                        <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Attanded Users</h3>
+                        <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Personnes Présentes</h3>
                         <p class="text-5xl mt-8 font-bold text-teal-500 group-hover:text-pink-300">{{ $attendedUsersCount }} </p> 
-                        <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">from {{ $acceptedUsersCount  }} confirmed users</p>
+                        <p class="text-base mt-3 mb-8 font-bold text-gray-400 group-hover:text-white">Depuis {{ $acceptedUsersCount  }} personnes confirmés</p>
                     </div>
                 </div>
             </div>
@@ -114,8 +114,8 @@
             <div class="w-full mt-1">
                 <div class="rounded-lg shadow-2xl">
                     <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:bg-indigo-400 group">
-                        <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Invitation Rate</h3>
-                        <h4 class="relative top-6 text-center font-bold text-gray-400 group-hover:text-white">Invited users against all the participant role </h4>
+                        <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Taux d'invitation</h3>
+                        <h4 class="relative top-6 text-center font-bold text-gray-400 group-hover:text-white">Personnes invitées par rapport au nombre des participants</h4>
                         <div class=" each flex justify-center mt-10 mb-8">
                             <div class="flex items-center justify-center circular-progress relative h-32 w-32 rounded-full" onclick="animateCircle(this)">
                                 <input class="percentEnd" type="hidden" value="{{ round($userInvitationRate,0,PHP_ROUND_HALF_UP) }}">
@@ -131,8 +131,8 @@
             <div class="w-full mt-1">
                 <div class="rounded-lg shadow-2xl">
                     <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:bg-indigo-400 group">
-                        <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Confirmation Rate</h3>
-                        <h4 class="relative top-6 text-center font-bold text-gray-400 group-hover:text-white">Confirmed users against all the invited ones </h4>
+                        <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Taux de confirmation</h3>
+                        <h4 class="relative top-6 text-center font-bold text-gray-400 group-hover:text-white">Personnes confirmées par rapport aux personnes invitées</h4>
                         <div class="each flex justify-center mt-10 mb-8">
                             <div class="flex items-center justify-center circular-progress relative h-32 w-32 rounded-full" onclick="animateCircle(this)">
                                 <input class="percentEnd" type="hidden" value="{{ round($invitationConfirmationRate,0,PHP_ROUND_HALF_UP) }}">
@@ -148,8 +148,8 @@
             <div class="w-full mt-1">
                 <div class="rounded-lg shadow-2xl">
                     <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:bg-indigo-400 group">
-                        <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Attandance Rate</h3>
-                        <h4 class="relative top-6 text-center font-bold text-gray-400 group-hover:text-white">Users attanding the event against the invited users</h4>
+                        <h3 class="relative top-5 text-center font-bold text-orange-500 group-hover:text-white">Taux de présence</h3>
+                        <h4 class="relative top-6 text-center font-bold text-gray-400 group-hover:text-white">Personnes participants à l'événement par rapport aux personnes invitées</h4>
                         <div class="each flex justify-center mt-10 mb-8"> 
                             <div class="flex items-center justify-center circular-progress relative h-32 w-32 rounded-full" onclick="animateCircle(this)">
                                 <input class="percentEnd" type="hidden" value="{{ round($eventAttendanceRate,0,PHP_ROUND_HALF_UP) }}">

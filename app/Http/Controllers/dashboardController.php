@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 
 class dashboardController extends Controller
 {
@@ -38,7 +37,7 @@ class dashboardController extends Controller
                 {
                     app()->setLocale($language);
                 }
-                return back();//Redirect::route('dashboard');
+                return back();
             }
             if ($request->submit == 'changePass') 
             {
