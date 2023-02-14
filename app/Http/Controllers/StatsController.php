@@ -194,7 +194,7 @@ class StatsController extends Controller
 
         //! total absence rate (count of absence in all events[IV] / count of invitations in all events[II] * 100)
         $absenceCount = count(DB::select('select * from invitation_confirmations where isPresent = 0')); //- [IV]
-        $absenceRate = ($absenceCount/$invites)*100;
+        $absenceRate = $absenceCount/$invites*100;
 
         if($request->isMethod('post'))
         {

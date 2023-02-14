@@ -41,9 +41,6 @@
                                 </p>
                             @endif
                             <br>
-                            @if ($stop == true)
-                                <p>où tous les utilisateurs ont été marqués comme présents</p>
-                            @endif
                         </div>
 
                         

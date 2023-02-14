@@ -49,7 +49,7 @@
                             <h4 class="relative top-6 text-center font-bold text-gray-400 group-hover:text-white">Utilisateurs absents à tous les événements par rapport à toutes les invitations émises</h4>
                             <div class="each flex justify-center mt-10 mb-8">
                                 <div class="flex items-center justify-center circular-progress relative h-32 w-32 rounded-full" onclick="animateCircle(this)">
-                                    <input class="percentEnd" type="hidden" value=" {{ round($absenceRate,PHP_ROUND_HALF_UP) }}">
+                                    <input class="percentEnd" type="hidden" value=" {{ round($absenceRate,0,PHP_ROUND_HALF_UP) }}">
                                     <span class="progress-value text-indigo-500 relative text-xl font-bold ">0%</span>
                                 </div>
                             </div>
