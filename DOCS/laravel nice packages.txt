@@ -1,0 +1,18 @@
+*composer require doctrine/dbal : to refresh(update) migrations without loosing data
+*use Carbon\Carbon; : for date&time manipulation
+
+*to auto make a pivot table:
+composer require josezenem/laravel-make-migration-pivot
+php artisan make:pivot [model1] [model2]
+
+*to hash passwords:
+use Illuminate\Support\Facades\Hash;
+Hash::make('password')
+
+*to make a controller with pre-made crud functions:
+php artisan make:controller [controller's_name] --resource
+
+*to auto-make routes for all these functions:
+in the routes file:
+Route::resource(['Url_pre-defined_segment'],[controller_name]::class);
+

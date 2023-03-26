@@ -1,0 +1,4 @@
+josezenem/laravel-make-migration-pivot
+laravel/breeze
+nesbot/carbon
+laravel/tinker

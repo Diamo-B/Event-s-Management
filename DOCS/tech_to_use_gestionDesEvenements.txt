@@ -1,0 +1,10 @@
+Front-end: HTML - CSS - JS
+
+backend: php - Laravel 
+
+Base de donnée: Mysql - PhPMyAdmin
+ 
+Contrôle de version: GitBash
+
+Modélisation: UML
+

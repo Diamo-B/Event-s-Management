@@ -1,0 +1,20 @@
+To enable mass parametering in creating records we add this to the model class:
+
+    public $timestamps = false; //by default timestamp true
+    public function setCreatedAtAttribute($value) { 
+        $this->attributes['created_at'] = \Carbon\Carbon::now(); 
+    }
+    protected $guarded = [];  
+
+--------------------------------------------------------------------------------------------------------------
+Laravel eloquent:
+* Creating a new record
+$invitaion = new invitation(['title'=>'my invite','body'=>'hi there, i hope u like laravel'];
+
+*Saving a record to the database:
+$invitation->save();
+
+*retrieving data:
+$user = User::all()      						Gets all the users
+$user = User::where('firstName',$value)->first() 		Gets the first user that has a firstName == $value
+
